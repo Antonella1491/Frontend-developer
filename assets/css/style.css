@@ -690,10 +690,20 @@ footer .social-links .social-link:hover i {
 .card-header-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   color: #ffffff !important;
-  height: 140px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.card-body .list-unstyled li {
+  display: flex;
+  align-items: flex-start;
+}
+
+.card-body .list-unstyled li i {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
 }
 
 .feature-icon {
