@@ -1,0 +1,40 @@
+{
+  "name": "frontend-developer-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for a frontend developer using HTML, Bootstrap, SCSS and JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "sass:watch": "sass --watch assets/scss:assets/css",
+    "sass:build": "sass assets/scss:assets/css --style compressed",
+    "serve": "python -m http.server 8080",
+    "start": "npm run sass:watch",
+    "build": "npm run sass:build",
+    "dev": "concurrently \"npm run sass:watch\" \"npm run serve\""
+  },
+  "keywords": [
+    "portfolio",
+    "frontend",
+    "developer",
+    "html",
+    "css",
+    "scss",
+    "bootstrap",
+    "javascript",
+    "responsive",
+    "modern"
+  ],
+  "author": "Frontend Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.69.5",
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prezzi - Frontend Developer Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Skip link per accessibilità -->
+    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation" aria-label="Navigazione principale">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html" aria-label="Frontend Developer - Vai alla homepage">
+                <i class="bi bi-code-slash text-primary me-2" aria-hidden="true"></i>
+                Frontend Dev
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Apri menu di navigazione">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home" aria-label="Vai alla sezione Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about" aria-label="Vai alla sezione Chi Sono">Chi Sono</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#skills" aria-label="Vai alla sezione Competenze">Competenze</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#portfolio" aria-label="Vai alla sezione Portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="prezzi.html" aria-label="Vai alla pagina Prezzi">Prezzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact" aria-label="Vai alla sezione Contatti">Contatti</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section d-flex align-items-center py-5" id="pricing-hero">
+            <div class="container">
+                <div class="row align-items-center text-center">
+                    <div class="col-12">
+                        <h1 class="hero-title mb-4">
+                            <i class="bi bi-currency-euro text-primary me-3" aria-hidden="true"></i>
+                            Listino Prezzi
+                        </h1>
+                        <p class="hero-description lead mb-5">
+                            Soluzioni web professionali per ogni esigenza e budget.<br>
+                            Trasparenza, qualità e risultati garantiti.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Cards Section -->
+        <section class="py-5 bg-light" id="pricing-plans" aria-label="Piani tariffari">
+            <div class="container">
+                <div class="row">
+                    <!-- Pacchetto One-page -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-header card-header-gradient text-center py-4">
+                                <h3 class="card-title mb-2">
+                                    <i class="bi bi-file-earmark-code me-2" aria-hidden="true"></i>
+                                    One-page
+                                </h3>
+                                <div class="price-display">
+                                    <span class="h2 fw-bold">€299</span>
+                                    <span class="text-primary-light">una tantum</span>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="text-muted mb-4">Soluzione essenziale per iniziare</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        1 pagina responsive
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Design moderno
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Form di contatto
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        SEO di base
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Consegna in 3-5 giorni
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Supporto 15 giorni
+                                    </li>
+                                </ul>
+                                <a href="index.html#contact" class="btn btn-primary mt-auto">Richiedi Preventivo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pacchetto Base Multipagina -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 shadow border-primary position-relative">
+                            <div class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">
+                                <i class="bi bi-star-fill me-1" aria-hidden="true"></i>
+                                Più Richiesto
+                            </div>
+                            <div class="card-header card-header-gradient text-center py-4">
+                                <h3 class="card-title mb-2">
+                                    <i class="bi bi-globe me-2" aria-hidden="true"></i>
+                                    Base Multipagina
+                                </h3>
+                                <div class="price-display">
+                                    <span class="h2 fw-bold">€599</span>
+                                    <span class="text-primary-light">una tantum</span>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="text-muted mb-4">Ideale per piccole aziende</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Tutto del pacchetto One-page
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Fino a 5 pagine
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Menu di navigazione
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Galleria immagini
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        SEO ottimizzato
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Consegna in 7-10 giorni
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Supporto 30 giorni
+                                    </li>
+                                </ul>
+                                <a href="index.html#contact" class="btn btn-primary mt-auto">Richiedi Preventivo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pacchetto Pro Multipagina -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 shadow border-primary position-relative">
+                            <div class="badge bg-primary position-absolute top-0 start-50 translate-middle px-3 py-2">
+                                <i class="bi bi-star-fill me-1" aria-hidden="true"></i>
+                                Più Richiesto
+                            </div>
+                            <div class="card-header card-header-gradient text-center py-4">
+                                <h3 class="card-title mb-2">
+                                    <i class="bi bi-building me-2" aria-hidden="true"></i>
+                                    Pro Multipagina
+                                </h3>
+                                <div class="price-display">
+                                    <span class="h2 fw-bold">€999</span>
+                                    <span class="text-primary-light">una tantum</span>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="text-muted mb-4">Perfetto per aziende in crescita</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Tutto del pacchetto Base
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Fino a 10 pagine
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Blog/News integrato
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Analytics avanzato
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Ottimizzazione performance
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Consegna in 12-15 giorni
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Supporto 60 giorni
+                                    </li>
+                                </ul>
+                                <a href="index.html#contact" class="btn btn-primary mt-auto">Richiedi Preventivo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pacchetto Premium Multipagina -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-header card-header-gradient text-center py-4">
+                                <h3 class="card-title mb-2">
+                                    <i class="bi bi-gem me-2" aria-hidden="true"></i>
+                                    Premium Multipagina
+                                </h3>
+                                <div class="price-display">
+                                    <span class="h2 fw-bold">€1499</span>
+                                    <span class="text-primary-light">una tantum</span>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="text-muted mb-4">La soluzione più completa</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Tutto del pacchetto Pro
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Pagine illimitate
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        E-commerce integrato
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Area riservata clienti
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Sicurezza avanzata
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Consegna in 18-25 giorni
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle text-success me-2" aria-hidden="true"></i>
+                                        Supporto 90 giorni
+                                    </li>
+                                </ul>
+                                <a href="index.html#contact" class="btn btn-primary mt-auto">Richiedi Preventivo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servizi Aggiuntivi -->
+        <section class="py-5" id="additional-services" aria-label="Servizi aggiuntivi">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5">
+                        <h2 class="section-title">Servizi Aggiuntivi</h2>
+                        <div class="section-divider"></div>
+                        <p class="lead text-muted">
+                            Potenzia il tuo sito web con servizi professionali aggiuntivi
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="text-center">
+                            <div class="feature-icon mx-auto mb-3">
+                                <i class="bi bi-speedometer2 text-primary"></i>
+                            </div>
+                            <h5>Ottimizzazione Performance</h5>
+                            <p class="text-muted mb-3">Velocità e prestazioni al top</p>
+                            <p class="h5 text-primary fw-bold">€149</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="text-center">
+                            <div class="feature-icon mx-auto mb-3">
+                                <i class="bi bi-shield-check text-primary"></i>
+                            </div>
+                            <h5>Sicurezza Avanzata</h5>
+                            <p class="text-muted mb-3">Protezione SSL e backup</p>
+                            <p class="h5 text-primary fw-bold">€99</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="text-center">
+                            <div class="feature-icon mx-auto mb-3">
+                                <i class="bi bi-graph-up text-primary"></i>
+                            </div>
+                            <h5>SEO Premium</h5>
+                            <p class="text-muted mb-3">Posizionamento sui motori</p>
+                            <p class="h5 text-primary fw-bold">€199</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="text-center">
+                            <div class="feature-icon mx-auto mb-3">
+                                <i class="bi bi-tools text-primary"></i>
+                            </div>
+                            <h5>Manutenzione Mensile</h5>
+                            <p class="text-muted mb-3">Aggiornamenti e supporto</p>
+                            <p class="h5 text-primary fw-bold">€79<small>/mese</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-5 bg-light" id="faq" aria-label="Domande frequenti">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center mb-5">
+                        <h2 class="section-title">Domande Frequenti</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="faq1">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                        Quali sono i tempi di consegna?
+                                    </button>
+                                </h3>
+                                <div id="collapse1" class="accordion-collapse collapse show" 
+                                     aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        I tempi variano in base al progetto: Landing Page 5-7 giorni, Sito Aziendale 10-14 giorni, 
+                                        E-commerce 15-21 giorni. I tempi partono dalla conferma del progetto e ricezione dei contenuti.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="faq2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        È incluso il nome dominio e hosting?
+                                    </button>
+                                </h3>
+                                <div id="collapse2" class="accordion-collapse collapse" 
+                                     aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        I prezzi includono solo lo sviluppo del sito. Dominio e hosting sono a carico del cliente, 
+                                        ma posso consigliarti le migliori soluzioni in base alle tue esigenze e budget.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="faq3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        Posso modificare il sito dopo la consegna?
+                                    </button>
+                                </h3>
+                                <div id="collapse3" class="accordion-collapse collapse" 
+                                     aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Assolutamente sì! Offro 30 giorni di supporto gratuito per piccole modifiche. 
+                                        Per cambiamenti più significativi, fornisco preventivi personalizzati.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        Quale metodo di pagamento accetti?
+                                    </button>
+                                </h3>
+                                <div id="collapse4" class="accordion-collapse collapse" 
+                                     aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Accetto bonifico bancario, PayPal e carte di credito. 
+                                        Il pagamento è suddiviso: 50% all'inizio del progetto e 50% alla consegna finale.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-5 bg-primary text-white" id="cta" aria-label="Chiamata all'azione">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h2 class="mb-3">Pronto a iniziare il tuo progetto?</h2>
+                        <p class="lead mb-4">
+                            Contattami per una consulenza gratuita e un preventivo personalizzato
+                        </p>
+                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                            <a href="index.html#contact" class="btn btn-outline-light btn-lg">
+                                <i class="bi bi-envelope me-2" aria-hidden="true"></i>
+                                Richiedi Preventivo
+                            </a>
+                            <a href="https://wa.me/+393405560275" class="btn btn-light btn-lg" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-whatsapp me-2" aria-hidden="true"></i>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4" role="contentinfo" aria-label="Informazioni del sito">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 Frontend Developer. Tutti i diritti riservati.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <nav class="social-links" aria-label="Link social media nel footer">
+                        <a href="https://wa.me/+393405560275" class="social-link me-3" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/feed/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
