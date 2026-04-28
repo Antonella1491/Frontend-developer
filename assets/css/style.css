@@ -1,3 +1,34 @@
+.accordion-button::after {
+  filter: none !important;
+  background-image: none !important;
+  color: #fff !important;
+  /* For Bootstrap 5 che usa SVG come background-image */
+  content: "";
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill="white" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>') center/1.25em no-repeat !important;
+}
+
+/* Allineamento orizzontale e posizione fissa per tempi di consegna nelle card prezzi */
+.delivery-row {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delivery-text {
+  font-size: 1rem;
+  font-style: italic;
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
 /* Variables */
 /* Fonts */
 /* Spacing */
@@ -11,7 +42,10 @@
 
 /* Supporto per movimento ridotto per accessibilità */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -58,7 +92,7 @@ select:focus {
   position: absolute;
   top: -40px;
   left: 6px;
-  background-color: #0d6efd;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   padding: 8px;
   text-decoration: none;
@@ -86,16 +120,24 @@ select:focus {
 
 /* Navbar Styles */
 .navbar {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.12);
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.08);
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
 
 .navbar.scrolled {
-  background-color: rgba(33, 37, 41, 0.95) !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 10px 30px rgba(31, 41, 55, 0.12);
 }
 
 .navbar-brand {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
   font-weight: 700;
   font-size: 1.5rem;
 }
@@ -104,7 +146,16 @@ select:focus {
   font-size: 1.8rem;
 }
 
+.bi-code-slash::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
 .nav-link {
+  color: #334155 !important;
   font-weight: 500;
   transition: all 0.3s ease;
   border-radius: 5px;
@@ -113,13 +164,26 @@ select:focus {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #0d6efd !important;
-  background-color: rgba(13, 110, 253, 0.1);
+  color: #5b6ee1 !important;
+  background-color: rgba(102, 126, 234, 0.1);
 }
 
 .nav-link:focus {
   outline: 2px solid #0d6efd;
   outline-offset: 2px;
+}
+
+.nav-link.active {
+  color: #5b6ee1 !important;
+  background-color: rgba(102, 126, 234, 0.12);
+}
+
+.navbar-toggler {
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.2);
 }
 
 /* Hero Section */
@@ -161,7 +225,7 @@ select:focus {
 
 .hero-title .typed-text {
   position: relative;
-  text-shadow: 
+  text-shadow:
     -1px -1px 0 #ffffff,
     1px -1px 0 #ffffff,
     -1px 1px 0 #ffffff,
@@ -251,17 +315,17 @@ select:focus {
   border-radius: 50%;
   object-fit: cover;
   border: 8px solid transparent;
-  background: linear-gradient(white, white) padding-box, 
-              linear-gradient(135deg, #0d6efd, #667eea, #764ba2) border-box;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #0d6efd, #667eea, #764ba2) border-box;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3),
-              0 0 30px rgba(13, 110, 253, 0.3);
+    0 0 30px rgba(13, 110, 253, 0.3);
   transition: all 0.3s ease;
 }
 
 .coding-image:hover {
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.4),
-              0 0 40px rgba(13, 110, 253, 0.5);
+    0 0 40px rgba(13, 110, 253, 0.5);
   border-width: 12px;
 }
 
@@ -270,7 +334,7 @@ select:focus {
     width: 280px;
     height: 280px;
   }
-  
+
   .coding-image {
     width: 300px;
     height: 300px;
@@ -282,7 +346,7 @@ select:focus {
     width: 250px;
     height: 250px;
   }
-  
+
   .coding-image {
     width: 250px;
     height: 250px;
@@ -299,7 +363,7 @@ select:focus {
 .section-divider {
   width: 80px;
   height: 4px;
-  background-color: #0d6efd;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   margin: 0 auto 3rem;
   border-radius: 2px;
 }
@@ -372,12 +436,15 @@ select:focus {
   margin-right: 1rem;
   width: 60px;
   height: 60px;
+  min-width: 60px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(13, 110, 253, 0.1);
   border-radius: 50%;
   color: #0d6efd;
+  flex-shrink: 0;
 }
 
 .about-item h6 {
@@ -389,6 +456,22 @@ select:focus {
 .about-item p {
   margin-bottom: 0;
   color: #495057;
+}
+
+.bi-calendar-check::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+.bi-award::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
 }
 
 /* Skills Section */
@@ -410,7 +493,7 @@ select:focus {
 .skill-card .skill-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #0d6efd, #6c757d);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -437,7 +520,7 @@ select:focus {
 }
 
 .skill-card .progress .progress-bar {
-  background: linear-gradient(90deg, #0d6efd, #198754);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 4px;
   transition: width 1s ease-out;
   color: #ffffff;
@@ -520,6 +603,83 @@ select:focus {
 }
 
 /* Contact Section */
+#contact {
+  background: linear-gradient(135deg, #243b6b 0%, #2f234d 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+#contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(102, 126, 234, 0.18), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(118, 75, 162, 0.2), transparent 40%);
+  pointer-events: none;
+}
+
+#contact .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fai sì che contact-info e contact-form abbiano sempre la stessa altezza */
+#contact .row.contact-equal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+#contact .row.contact-equal>[class^="col-"],
+#contact .row.contact-equal>[class*=" col-"] {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  margin-bottom: 0 !important;
+}
+
+#contact .contact-info,
+#contact .contact-form {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+@media (min-width: 992px) {
+
+  #contact .contact-info,
+  #contact .contact-form {
+    min-height: 400px;
+  }
+}
+
+#contact .contact-info,
+#contact .contact-form {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#contact .contact-info p,
+#contact .contact-info h4,
+#contact .contact-info h6 {
+  color: #ffffff;
+}
+
 .contact-info .contact-item {
   display: flex;
   align-items: center;
@@ -530,6 +690,44 @@ select:focus {
   font-size: 2rem;
   margin-right: 1rem;
   width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.bi-envelope::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+.bi-phone::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+.placeholder-project .bi-phone::before {
+  background: #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+.contact-item .bi-phone::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
 }
 
 .contact-info .contact-item h6 {
@@ -543,8 +741,8 @@ select:focus {
 }
 
 .contact-form .form-control {
-  background-color: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
   border-radius: 10px;
   padding: 0.75rem 1rem;
@@ -556,7 +754,7 @@ select:focus {
 }
 
 .contact-form .form-control:focus {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.16);
   border-color: #0d6efd;
   color: #ffffff;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.4);
@@ -564,25 +762,118 @@ select:focus {
 }
 
 .contact-form .btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
   border-radius: 25px;
   padding: 0.75rem 2rem;
   font-weight: 500;
 }
 
-/* Footer */
+.contact-form .btn:hover,
+.contact-form .btn:focus {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* CTA Section (prezzi.html) */
+#cta {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10);
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+#cta h2,
+#cta p,
+#cta .lead {
+  color: #fff !important;
+  text-shadow: 0 2px 8px rgba(31, 41, 55, 0.10);
+}
+
+#cta .btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  background: transparent;
+  font-weight: 600;
+  border-radius: 25px;
+  transition: background 0.2s, color 0.2s;
+}
+
+#cta .btn-outline-light:hover,
+#cta .btn-outline-light:focus {
+  background: #fff;
+  color: #667eea;
+  border-color: #fff;
+}
+
+#cta .btn-light {
+  background: transparent;
+  color: #fff;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+#cta .btn-light:hover,
+#cta .btn-light:focus {
+  background: #f3f4f6;
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+#cta .btn-outline-light .bi-envelope::before {
+  color: #fff !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+#cta .btn-outline-light:hover .bi-envelope::before,
+#cta .btn-outline-light:focus .bi-envelope::before {
+  color: #667eea !important;
+}
+
+footer {
+  background: linear-gradient(135deg, #243b6b 0%, #2f234d 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+}
+
+footer p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
 footer .social-links .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
   color: #ffffff;
   text-decoration: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 footer .social-links .social-link:hover {
-  color: #0d6efd;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
 }
 
 footer .social-links .social-link i {
   font-size: 1.25rem;
   color: #ffffff;
+}
+
+footer .social-links .social-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.3);
 }
 
 footer .social-links .social-link:hover i {
@@ -591,10 +882,14 @@ footer .social-links .social-link:hover i {
 
 /* Animations */
 @keyframes blink {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -604,20 +899,25 @@ footer .social-links .social-link:hover i {
   .hero-title {
     font-size: 2rem;
   }
+
   .hero-description {
     font-size: 1rem;
   }
+
   .hero-buttons .btn {
     display: block;
     width: 100%;
     margin-bottom: 1rem;
   }
+
   .section-title {
     font-size: 2rem;
   }
+
   .skill-card {
     margin-bottom: 2rem;
   }
+
   .code-animation {
     width: 250px;
     height: 250px;
@@ -629,17 +929,30 @@ footer .social-links .social-link:hover i {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
   .social-links {
     text-align: center;
   }
+
   .social-links .social-link {
     width: 45px;
     height: 45px;
     margin-right: 0.5rem;
   }
+
   .social-links .social-link i {
     font-size: 1rem;
   }
+}
+
+.price-text {
+  font-size: 1.250rem;
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
 }
 
 /* Utility Classes */
@@ -697,6 +1010,59 @@ footer .social-links .social-link:hover i {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
+}
+
+/* (Rimosso): bordo gradiente per le card nella sezione prezzi */
+
+/* Bottoni "Richiedi Preventivo" nella sezione prezzi - gradiente coerente */
+#pricing-plans .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  border-radius: 25px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  box-shadow: 0 8px 18px rgba(102, 126, 234, 0.12);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#pricing-plans .btn-primary:hover,
+#pricing-plans .btn-primary:focus {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(102, 126, 234, 0.16);
+  outline: none;
+}
+
+#pricing-plans .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Badge styling specifico per la pagina prezzi: coerente con il gradiente del sito */
+#pricing-plans .badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 12px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  box-shadow: 0 8px 18px rgba(102, 126, 234, 0.18);
+  font-weight: 600;
+}
+
+#pricing-plans .badge i {
+  color: #ffffff !important;
+  opacity: 0.95;
+}
+
+#pricing-plans .badge {
+  z-index: 6;
+}
+
+#pricing-plans .badge:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
 }
 
 .card-body .list-unstyled li {
@@ -712,7 +1078,7 @@ footer .social-links .social-link:hover i {
 .feature-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #0d6efd, #667eea);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -741,9 +1107,44 @@ footer .social-links .social-link:hover i {
   transform: translateY(-5px);
 }
 
+
+/* Accordion FAQ prezzi: coerente con il resto della pagina */
+.accordion-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
 .accordion-button:not(.collapsed) {
-  background-color: rgba(13, 110, 253, 0.1);
-  color: #0d6efd;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+  border-color: #667eea;
+  outline: none;
+}
+
+.accordion-button:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  color: #fff;
+}
+
+.accordion-item {
+  border: 1.5px solid #667eea;
+  overflow: hidden;
+  background: #fff;
+}
+
+.accordion-body {
+  background: #f8f9fa;
+  color: #212529;
+  border-radius: 0 0 12px 12px;
 }
 
 .accordion-button:focus {
@@ -751,17 +1152,33 @@ footer .social-links .social-link:hover i {
   border-color: #0d6efd;
 }
 
+.accordion-item+.accordion-item {
+  border-top: 1px solid #fff !important;
+}
+
+/* Custom gradient button */
+.btn-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+  color: #ffffff !important;
+}
+
 /* Pricing responsive design */
 @media (max-width: 768px) {
   .price-display .h2 {
     font-size: 1.5rem;
   }
-  
+
   .feature-icon {
     width: 60px;
     height: 60px;
   }
-  
+
   .feature-icon i {
     font-size: 1.5rem;
   }
