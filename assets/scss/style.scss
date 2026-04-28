@@ -63,7 +63,7 @@ html {
 .navbar {
   @include transition();
   backdrop-filter: blur(10px);
-  
+
   &.scrolled {
     background-color: rgba(33, 37, 41, 0.95) !important;
     @include box-shadow(0 2px 10px rgba(0, 0, 0, 0.1));
@@ -73,7 +73,7 @@ html {
 .navbar-brand {
   font-weight: $font-weight-bold;
   font-size: 1.5rem;
-  
+
   i {
     font-size: 1.8rem;
   }
@@ -82,7 +82,7 @@ html {
 .nav-link {
   font-weight: $font-weight-medium;
   @include transition();
-  
+
   &:hover {
     color: $primary-color !important;
   }
@@ -94,7 +94,7 @@ html {
   color: $white;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -116,14 +116,18 @@ html {
   font-size: 3.5rem;
   font-weight: $font-weight-bold;
   margin-bottom: $spacer * 2;
-  
+
   @media (max-width: 768px) {
     font-size: 2.5rem;
+
+    .coding-image {
+      display: none !important;
+    }
   }
-  
+
   .typed-text {
     position: relative;
-    
+
     &::after {
       content: '|';
       animation: blink 1s infinite;
@@ -139,13 +143,13 @@ html {
 
 .hero-buttons {
   margin-bottom: $spacer * 3;
-  
+
   .btn {
     padding: 0.75rem 2rem;
     font-weight: $font-weight-medium;
     @include border-radius(50px);
     @include transition();
-    
+
     &:hover {
       transform: translateY(-2px);
       @include box-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.2));
@@ -166,12 +170,12 @@ html {
     @include border-radius(50%);
     margin-right: $spacer;
     @include transition();
-    
+
     &:hover {
       background-color: $primary-color;
       transform: translateY(-3px);
     }
-    
+
     i {
       font-size: 1.25rem;
     }
@@ -192,19 +196,38 @@ html {
   @include border-radius(20px);
   padding: $spacer * 2;
   position: relative;
-  
+
   .code-line {
     height: 20px;
     background: linear-gradient(90deg, #007bff, #28a745, #ffc107, #dc3545);
     margin-bottom: $spacer;
     @include border-radius(10px);
     animation: codeFlow 3s ease-in-out infinite;
-    
-    &:nth-child(1) { width: 80%; animation-delay: 0s; }
-    &:nth-child(2) { width: 60%; animation-delay: 0.5s; }
-    &:nth-child(3) { width: 90%; animation-delay: 1s; }
-    &:nth-child(4) { width: 70%; animation-delay: 1.5s; }
-    &:nth-child(5) { width: 50%; animation-delay: 2s; }
+
+    &:nth-child(1) {
+      width: 80%;
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      width: 60%;
+      animation-delay: 0.5s;
+    }
+
+    &:nth-child(3) {
+      width: 90%;
+      animation-delay: 1s;
+    }
+
+    &:nth-child(4) {
+      width: 70%;
+      animation-delay: 1.5s;
+    }
+
+    &:nth-child(5) {
+      width: 50%;
+      animation-delay: 2s;
+    }
   }
 }
 
@@ -226,7 +249,7 @@ html {
 // About Section
 .about-image {
   text-align: center;
-  
+
   .placeholder-image {
     width: 300px;
     height: 300px;
@@ -237,7 +260,7 @@ html {
     justify-content: center;
     margin: 0 auto;
     @include box-shadow();
-    
+
     i {
       font-size: 8rem;
       color: $white;
@@ -247,12 +270,12 @@ html {
 
 .about-content {
   padding-left: $spacer * 2;
-  
+
   @media (max-width: 992px) {
     padding-left: 0;
     margin-top: $spacer * 2;
   }
-  
+
   h3 {
     color: $primary-color;
     font-weight: $font-weight-semibold;
@@ -263,18 +286,18 @@ html {
   display: flex;
   align-items: center;
   margin-bottom: $spacer * 2;
-  
+
   i {
     font-size: 2rem;
     margin-right: $spacer;
   }
-  
+
   h6 {
     font-weight: $font-weight-semibold;
     margin-bottom: 0.25rem;
     color: $dark-color;
   }
-  
+
   p {
     margin-bottom: 0;
     color: $secondary-color;
@@ -290,12 +313,12 @@ html {
   @include box-shadow();
   @include transition();
   height: 100%;
-  
+
   &:hover {
     transform: translateY(-10px);
     @include box-shadow(0 1rem 2rem rgba(0, 0, 0, 0.1));
   }
-  
+
   .skill-icon {
     width: 80px;
     height: 80px;
@@ -305,24 +328,24 @@ html {
     align-items: center;
     justify-content: center;
     margin: 0 auto $spacer * 1.5;
-    
+
     i {
       font-size: 2.5rem;
       color: $white;
     }
   }
-  
+
   h5 {
     font-weight: $font-weight-semibold;
     margin-bottom: $spacer;
     color: $dark-color;
   }
-  
+
   .progress {
     height: 8px;
     background-color: #e9ecef;
     @include border-radius(4px);
-    
+
     .progress-bar {
       background: linear-gradient(90deg, $primary-color, #28a745);
       @include border-radius(4px);
@@ -337,7 +360,7 @@ html {
 // Portfolio Section
 .portfolio-item {
   @include transition();
-  
+
   &:hover {
     transform: translateY(-10px);
   }
@@ -348,7 +371,7 @@ html {
   overflow: hidden;
   @include border-radius(15px);
   margin-bottom: $spacer;
-  
+
   .placeholder-project {
     width: 100%;
     height: 250px;
@@ -357,13 +380,13 @@ html {
     align-items: center;
     justify-content: center;
     position: relative;
-    
+
     i {
       font-size: 4rem;
       color: $white;
       opacity: 0.8;
     }
-    
+
     .overlay {
       position: absolute;
       top: 0;
@@ -376,13 +399,13 @@ html {
       justify-content: center;
       opacity: 0;
       @include transition();
-      
+
       .btn {
         @include border-radius(25px);
       }
     }
   }
-  
+
   &:hover .overlay {
     opacity: 1;
   }
@@ -402,18 +425,18 @@ html {
     display: flex;
     align-items: center;
     margin-bottom: $spacer * 2;
-    
+
     i {
       font-size: 2rem;
       margin-right: $spacer;
       width: 50px;
     }
-    
+
     h6 {
       font-weight: $font-weight-semibold;
       margin-bottom: 0.25rem;
     }
-    
+
     p {
       margin-bottom: 0;
       opacity: 0.8;
@@ -429,11 +452,11 @@ html {
     @include border-radius(10px);
     padding: 0.75rem 1rem;
     @include transition();
-    
+
     &::placeholder {
       color: rgba(255, 255, 255, 0.7);
     }
-    
+
     &:focus {
       background-color: rgba(255, 255, 255, 0.15);
       border-color: $primary-color;
@@ -441,7 +464,7 @@ html {
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
   }
-  
+
   .btn {
     @include border-radius(25px);
     padding: 0.75rem 2rem;
@@ -456,11 +479,11 @@ footer {
       color: $white;
       text-decoration: none;
       @include transition();
-      
+
       &:hover {
         color: $primary-color;
       }
-      
+
       i {
         font-size: 1.25rem;
       }
@@ -470,15 +493,26 @@ footer {
 
 // Animations
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes codeFlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     transform: translateX(0);
   }
+
   50% {
     opacity: 1;
     transform: translateX(10px);
@@ -487,14 +521,18 @@ footer {
 
 // Responsive Design
 @media (max-width: 768px) {
+  .hero-image {
+    display: none;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-description {
     font-size: 1rem;
   }
-  
+
   .hero-buttons {
     .btn {
       display: block;
@@ -502,15 +540,15 @@ footer {
       margin-bottom: $spacer;
     }
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .skill-card {
     margin-bottom: $spacer * 2;
   }
-  
+
   .code-animation {
     width: 250px;
     height: 250px;
@@ -518,19 +556,27 @@ footer {
 }
 
 @media (max-width: 576px) {
+  .coding-image {
+    display: none;
+  }
+
+  .hero-section {
+    height: 700px;
+  }
+
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .social-links {
     text-align: center;
-    
+
     .social-link {
       width: 45px;
       height: 45px;
       margin-right: 0.5rem;
-      
+
       i {
         font-size: 1rem;
       }
@@ -550,7 +596,7 @@ footer {
 .btn-primary {
   background-color: $primary-color;
   border-color: $primary-color;
-  
+
   &:hover {
     background-color: darken($primary-color, 10%);
     border-color: darken($primary-color, 10%);
