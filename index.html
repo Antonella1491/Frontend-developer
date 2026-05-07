@@ -22,6 +22,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () { emailjs.init({ publicKey: 'KfeKbfvg84r-kG6o0' }); })();
+    </script>
+
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
@@ -73,6 +79,10 @@
                 <div class="row align-items-center min-vh-100">
                     <div class="col-lg-6">
                         <div class="hero-content">
+                            <span class="hero-badge">
+                                <i class="bi bi-stars me-2" aria-hidden="true"></i>
+                                Disponibile per nuovi progetti
+                            </span>
                             <h1 class="hero-title">
                                 Ciao, sono Antonella, un
                                 <span class="text-primary typed-text"></span>
@@ -82,9 +92,30 @@
                                 concreto e orientato all’utente.
 
                             </p>
+                            <div class="hero-tech-stack" aria-label="Tecnologie principali">
+                                <span class="hero-chip">HTML5</span>
+                                <span class="hero-chip">CSS3</span>
+                                <span class="hero-chip">JavaScript</span>
+                                <span class="hero-chip">TypeScript</span>
+                                <span class="hero-chip">Angular</span>
+                            </div>
                             <div class="hero-buttons">
-                                <a href="#portfolio" class="btn btn-outline-light btn-lg me-3">I Miei Progetti</a>
-                                <a href="#contact" class="btn btn-outline-light btn-lg">Contattami</a>
+                                <a href="#portfolio" class="btn btn-hero-primary btn-lg me-3">I Miei Progetti</a>
+                                <a href="#contact" class="btn btn-hero-ghost btn-lg">Contattami</a>
+                            </div>
+                            <div class="hero-metrics" aria-label="Risultati principali">
+                                <div class="hero-metric">
+                                    <strong>50+</strong>
+                                    <span>Progetti completati</span>
+                                </div>
+                                <div class="hero-metric">
+                                    <strong>3+ anni</strong>
+                                    <span>Esperienza frontend</span>
+                                </div>
+                                <div class="hero-metric">
+                                    <strong>WCAG</strong>
+                                    <span>Accessibilità by design</span>
+                                </div>
                             </div>
                             <div class="social-links mt-4">
                                 <a href="https://wa.me/+393405560275" class="social-link" target="_blank"
@@ -298,6 +329,9 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto E-commerce Website">
                                     <i class="bi bi-laptop" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -312,6 +346,9 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Mobile App Landing">
                                     <i class="bi bi-phone" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -321,56 +358,68 @@
                         </article>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-item">
+                        <article class="portfolio-item" aria-label="Progetto Corporate Website">
                             <div class="portfolio-image">
-                                <div class="placeholder-project">
-                                    <i class="bi bi-globe"></i>
+                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Corporate Website">
+                                    <i class="bi bi-globe" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
                                 <h5>Corporate Website</h5>
                                 <p class="text-muted">HTML5, CSS3, JavaScript</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-item">
+                        <article class="portfolio-item" aria-label="Progetto Creative Portfolio">
                             <div class="portfolio-image">
-                                <div class="placeholder-project">
-                                    <i class="bi bi-brush"></i>
+                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Creative Portfolio">
+                                    <i class="bi bi-brush" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
                                 <h5>Creative Portfolio</h5>
                                 <p class="text-muted">Vue.js, SCSS, Animation</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-item">
+                        <article class="portfolio-item" aria-label="Progetto Dashboard Analytics">
                             <div class="portfolio-image">
-                                <div class="placeholder-project">
-                                    <i class="bi bi-graph-up"></i>
+                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Dashboard Analytics">
+                                    <i class="bi bi-graph-up" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
                                 <h5>Dashboard Analytics</h5>
                                 <p class="text-muted">Angular, Chart.js, Bootstrap</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-item">
+                        <article class="portfolio-item" aria-label="Progetto Blog Platform">
                             <div class="portfolio-image">
-                                <div class="placeholder-project">
-                                    <i class="bi bi-journal-text"></i>
+                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Blog Platform">
+                                    <i class="bi bi-journal-text" aria-hidden="true"></i>
+                                    <div class="overlay">
+                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
                                 <h5>Blog Platform</h5>
                                 <p class="text-muted">JavaScript, CSS Grid, API</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -425,11 +474,21 @@
                                     <div id="email-help" class="sr-only">Inserisci un indirizzo email valido</div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="contact-subject" class="sr-only">Oggetto</label>
-                                <input type="text" id="contact-subject" name="subject" class="form-control"
-                                    placeholder="Oggetto" required aria-describedby="subject-help">
-                                <div id="subject-help" class="sr-only">Inserisci l'oggetto del messaggio</div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="contact-phone" class="sr-only">Il tuo numero di telefono</label>
+                                    <input type="tel" id="contact-phone" name="phone" class="form-control"
+                                        placeholder="Numero di telefono" required aria-describedby="phone-error">
+                                    <div id="phone-error" class="form-field-error" role="alert" aria-live="polite" style="display:none;">
+                                        <i class="bi bi-exclamation-circle me-1"></i>Inserisci un numero valido (es. +39 333 1234567)
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="contact-subject" class="sr-only">Oggetto</label>
+                                    <input type="text" id="contact-subject" name="subject" class="form-control"
+                                        placeholder="Oggetto" required aria-describedby="subject-help">
+                                    <div id="subject-help" class="sr-only">Inserisci l'oggetto del messaggio</div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="contact-message" class="sr-only">Il tuo messaggio</label>
@@ -442,16 +501,16 @@
                             <div id="form-status" class="mb-3" style="display: none;">
                                 <div id="success-message" class="alert alert-success" style="display: none;">
                                     <i class="bi bi-check-circle me-2"></i>
-                                    Messaggio preparato! Il tuo client email si aprirà automaticamente.
+                                    Messaggio inviato con successo! Ti risponderò entro 24 ore.
                                 </div>
                                 <div id="error-message" class="alert alert-danger" style="display: none;">
                                     <i class="bi bi-exclamation-triangle me-2"></i>
-                                    Si è verificato un errore. Contattami direttamente via WhatsApp o LinkedIn.
+                                    Si è verificato un errore. Contattami direttamente via <a href="https://wa.me/+393405560275" class="alert-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>.
                                 </div>
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-lg" aria-describedby="submit-help"
-                                id="submit-btn">
+                                id="submit-btn" disabled>
                                 <i class="bi bi-send me-2" aria-hidden="true"></i>
                                 <span id="btn-text">Invia Messaggio</span>
                                 <span id="btn-loading" style="display: none;">
@@ -466,6 +525,68 @@
             </div>
         </section>
     </main>
+
+    <!-- Modale di Conferma -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content confirm-modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <div class="confirm-modal-icon">
+                        <i class="bi bi-send-check" aria-hidden="true"></i>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                </div>
+                <div class="modal-body pt-2">
+                    <h5 class="modal-title fw-bold mb-1" id="confirmModalLabel">Conferma invio messaggio</h5>
+                    <p class="modal-subtitle mb-4">Controlla i dati prima di inviare</p>
+                    <ul class="confirm-recap-list" id="confirm-recap-list">
+                        <!-- filled by JS -->
+                    </ul>
+                </div>
+                <div class="modal-footer border-0 pt-0 gap-2">
+                    <button type="button" class="btn btn-modal-cancel" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Annulla
+                    </button>
+                    <button type="button" class="btn btn-modal-confirm" id="confirm-send-btn">
+                        <i class="bi bi-send me-1" aria-hidden="true"></i>Conferma e Invia
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale di Recap -->
+    <div class="modal fade" id="recapModal" tabindex="-1" aria-labelledby="recapModalLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content recap-modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                </div>
+                <div class="modal-body text-center px-4 pb-4">
+                    <div class="recap-success-icon" aria-hidden="true">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <h4 class="fw-bold mt-3 mb-1" id="recapModalLabel">Messaggio inviato!</h4>
+                    <p class="recap-subtitle mb-4">Il tuo messaggio è stato inviato direttamente. Ecco il riepilogo completo.</p>
+                    <div class="recap-card" id="recap-card">
+                        <!-- filled by JS -->
+                    </div>
+                    <p class="recap-note mt-3">
+                        <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
+                        Rispondo generalmente entro <strong>24 ore lavorative</strong>.
+                    </p>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center gap-3">
+                    <button type="button" class="btn btn-modal-confirm" data-bs-dismiss="modal">
+                        <i class="bi bi-house me-1" aria-hidden="true"></i>Torna alla Home
+                    </button>
+                    <a href="prezzi.html" class="btn btn-modal-cancel">
+                        <i class="bi bi-tag me-1" aria-hidden="true"></i>Vedi i Prezzi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-dark text-light py-4" role="contentinfo" aria-label="Informazioni del sito">
@@ -490,70 +611,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Form handling JS -->
-    <script>
-        document.getElementById('contact-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Get form data
-            const name = document.getElementById('contact-name').value;
-            const email = document.getElementById('contact-email').value;
-            const subject = document.getElementById('contact-subject').value;
-            const message = document.getElementById('contact-message').value;
-
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoading = document.getElementById('btn-loading');
-            const formStatus = document.getElementById('form-status');
-            const successMessage = document.getElementById('success-message');
-            const errorMessage = document.getElementById('error-message');
-
-            // Show loading state
-            submitBtn.disabled = true;
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-
-            // Hide previous messages
-            formStatus.style.display = 'none';
-            successMessage.style.display = 'none';
-            errorMessage.style.display = 'none';
-
-            // Create mailto link
-            const mailtoLink = `mailto:antonellapirozzi1491@libero.it?subject=${encodeURIComponent('Richiesta: ' + subject)}&body=${encodeURIComponent(
-                `Nome: ${name}\n` +
-                `Email: ${email}\n` +
-                `Oggetto: ${subject}\n\n` +
-                `Messaggio:\n${message}`
-            )}`;
-
-            try {
-                // Open email client
-                window.location.href = mailtoLink;
-
-                // Show success message
-                setTimeout(() => {
-                    formStatus.style.display = 'block';
-                    successMessage.style.display = 'block';
-
-                    // Reset form
-                    document.getElementById('contact-form').reset();
-                }, 500);
-
-            } catch (error) {
-                // Show error message
-                formStatus.style.display = 'block';
-                errorMessage.style.display = 'block';
-            }
-
-            // Reset button state
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
-            }, 1000);
-        });
-    </script>
 
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
