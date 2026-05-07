@@ -1139,8 +1139,8 @@ footer .social-links .social-link:hover i {
 #pricing-plans .btn-primary:focus {
   background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(102, 126, 234, 0.16);
-  outline: none;
+  box-shadow: 0 14px 30px #fff;
+  outline: 3px solid #5b6ee1;
 }
 
 #pricing-plans .btn-primary:active {
@@ -1229,13 +1229,14 @@ footer .social-links .social-link:hover i {
 .accordion-button:not(.collapsed) {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+  box-shadow: 0 8px 24px #fff;
+  outline: 3px solid #fff !important;
 }
 
-.accordion-button:focus {
-  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
-  border-color: #667eea;
-  outline: none;
+.accordion-button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.4);
 }
 
 .accordion-button:hover {
@@ -1253,11 +1254,6 @@ footer .social-links .social-link:hover i {
   background: #f8f9fa;
   color: #212529;
   border-radius: 0 0 12px 12px;
-}
-
-.accordion-button:focus {
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  border-color: #0d6efd;
 }
 
 .accordion-item+.accordion-item {
@@ -1434,12 +1430,17 @@ footer .social-links .social-link:hover i {
   font-size: 0.85rem;
 }
 
-.btn-addon:hover,
-.btn-addon:focus {
+.btn-addon:hover {
   background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
   color: #ffffff !important;
+}
+
+.btn-addon:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px #fff;
 }
 
 /* ───────── CTA Section ───────── */
@@ -1492,12 +1493,17 @@ footer .social-links .social-link:hover i {
   transition: all 0.25s ease;
 }
 
-.btn-cta-primary:hover,
-.btn-cta-primary:focus {
+.btn-cta-primary:hover {
   background: #ffffff !important;
   color: #667eea !important;
   transform: translateY(-3px);
   box-shadow: 0 16px 36px rgba(102, 126, 234, 0.48);
+}
+
+.btn-cta-primary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.5);
 }
 
 .btn-cta-primary i,
@@ -1510,9 +1516,9 @@ footer .social-links .social-link:hover i {
 }
 
 .btn-cta-primary:hover i,
-.btn-cta-primary:focus i,
+.btn-cta-primary:focus-visible i,
 .btn-cta-primary:hover i::before,
-.btn-cta-primary:focus i::before {
+.btn-cta-primary:focus-visible i::before {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -1528,11 +1534,16 @@ footer .social-links .social-link:hover i {
   transition: all 0.25s ease;
 }
 
-.btn-cta-ghost:hover,
-.btn-cta-ghost:focus {
+.btn-cta-ghost:hover {
   background: rgba(255, 255, 255, 0.08) !important;
   border-color: rgba(255, 255, 255, 0.5) !important;
   transform: translateY(-3px);
+}
+
+.btn-cta-ghost:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -1777,6 +1788,11 @@ footer .social-links .social-link:hover i {
   background: rgba(255,255,255,0.14);
   color: #fff;
 }
+.prm-btn-cancel:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.7);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
+}
 .prm-btn-confirm {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
@@ -1792,6 +1808,11 @@ footer .social-links .social-link:hover i {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(102,126,234,0.6);
   color: #fff;
+}
+.prm-btn-confirm:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(102,126,234,0.5);
 }
 
 .recap-modal-content {
