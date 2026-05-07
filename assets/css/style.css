@@ -64,14 +64,24 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Focus visibile per elementi interattivi */
-button:focus,
-a:focus,
+/* ── Focus: visibile solo con tastiera (non al click) ── */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Input e textarea: bordo colorato al focus (anche da mouse, UX form) */
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid #0d6efd;
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25) !important;
+  border-color: #667eea !important;
 }
 
 /* Miglioramento della leggibilità per screen reader */
@@ -163,14 +173,10 @@ select:focus {
 }
 
 .nav-link:hover,
-.nav-link:focus {
+.nav-link:focus-visible {
   color: #5b6ee1 !important;
   background-color: rgba(102, 126, 234, 0.1);
-}
-
-.nav-link:focus {
-  outline: 2px solid #0d6efd;
-  outline-offset: 2px;
+  outline: 3px solid #5b6ee1;
 }
 
 .nav-link.active {
@@ -648,12 +654,14 @@ select:focus {
   border: 2px solid #ffffff;
 }
 
-.portfolio-image .placeholder-project .overlay .btn:focus {
-  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
-  outline: none;
+.portfolio-image .placeholder-project .overlay .btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.5);
 }
 
-.portfolio-image:hover .overlay {
+.portfolio-image:hover .overlay,
+.portfolio-image .placeholder-project:focus-within .overlay {
   opacity: 1;
 }
 
@@ -834,10 +842,10 @@ select:focus {
 
 .contact-form .form-control:focus {
   background-color: rgba(255, 255, 255, 0.16);
-  border-color: #0d6efd;
+  border-color: #667eea;
   color: #ffffff;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.4);
-  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.35);
+  outline: 3px solid #5b6ee1;
 }
 
 .contact-form .btn {
@@ -846,6 +854,10 @@ select:focus {
   border-radius: 25px;
   padding: 0.75rem 2rem;
   font-weight: 500;
+}
+
+.back-to-top:focus {
+  outline: 3px solid #fff !important;
 }
 
 .contact-form .btn:hover,
@@ -1064,8 +1076,8 @@ footer .social-links .social-link:hover i {
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #0b5ed7;
-  border-color: #0a58ca;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  border-color: #fff;
+  box-shadow: 0 0 0 0.25rem #5b6ee1;
   transform: translateY(-2px);
 }
 
@@ -1091,6 +1103,11 @@ footer .social-links .social-link:hover i {
 
 .btn-outline-light:focus {
   outline: none;
+}
+
+.portfolio-image .placeholder-project .overlay .btn:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.5);
+  outline: 3px solid rgba(255, 255, 255, 0.5);
 }
 
 /* Pricing Page Styles */
@@ -2067,6 +2084,7 @@ body {
 .btn-hero-primary:focus {
   background: #ffffff !important;
   color: #5b6ee1 !important;
+  outline: 3px solid #fff !important;
 }
 
 .btn-hero-ghost {
@@ -2078,6 +2096,7 @@ body {
 .btn-hero-ghost:hover,
 .btn-hero-ghost:focus {
   background: rgba(255, 255, 255, 0.12) !important;
+  outline: 3px solid #fff !important;
 }
 
 .hero-metrics {
