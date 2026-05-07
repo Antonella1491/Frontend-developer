@@ -375,7 +375,7 @@ select:focus {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.4rem;
   }
 
   .hero-content .hero-buttons .me-3 {
@@ -998,7 +998,7 @@ footer .social-links .social-link:hover i {
   .hero-buttons .btn {
     display: block;
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .section-title {
