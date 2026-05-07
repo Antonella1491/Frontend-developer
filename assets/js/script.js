@@ -151,46 +151,153 @@ function initSmoothScrolling() {
 
 // Contact form handling
 function initContactForm() {
-    const contactForm = document.querySelector('.contact-form');
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+    const submitBtn  = document.getElementById('submit-btn');
+    const phoneInput = document.getElementById('contact-phone');
+    const phoneError = document.getElementById('phone-error');
 
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const subject = this.querySelector('input[type="text"]:nth-of-type(2)').value;
-            const message = this.querySelector('textarea').value;
+    // Regex telefono: accetta formati italiani e internazionali
+    const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{3,4}[-\s\.]?[0-9]{3,5}$/;
 
-            // Basic validation
-            if (!name || !email || !subject || !message) {
-                showNotification('Tutti i campi sono obbligatori!', 'error');
-                return;
-            }
+    // ── Validazione telefono on-blur ──────────────────────────
+    phoneInput.addEventListener('blur', function () {
+        const val = this.value.trim();
+        if (val && !phoneRegex.test(val)) {
+            phoneInput.classList.add('is-invalid');
+            phoneError.style.display = 'block';
+        } else {
+            phoneInput.classList.remove('is-invalid');
+            phoneError.style.display = 'none';
+        }
+        updateSubmitBtn();
+    });
 
-            if (!isValidEmail(email)) {
-                showNotification('Inserisci un indirizzo email valido!', 'error');
-                return;
-            }
+    // Rimuovi errore appena l'utente riprende a scrivere
+    phoneInput.addEventListener('input', function () {
+        if (phoneInput.classList.contains('is-invalid')) {
+            phoneInput.classList.remove('is-invalid');
+            phoneError.style.display = 'none';
+        }
+        updateSubmitBtn();
+    });
 
-            // Simulate form submission
-            const submitButton = this.querySelector('.btn');
-            const originalText = submitButton.innerHTML;
+    // ── Abilita/disabilita submit al cambio di qualsiasi campo ─
+    const fields = contactForm.querySelectorAll('input, textarea');
+    fields.forEach(f => f.addEventListener('input', updateSubmitBtn));
 
-            submitButton.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Invio in corso...';
-            submitButton.disabled = true;
+    function updateSubmitBtn() {
+        const name    = document.getElementById('contact-name').value.trim();
+        const email   = document.getElementById('contact-email').value.trim();
+        const phone   = phoneInput.value.trim();
+        const subject = document.getElementById('contact-subject').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+        const phoneOk = phoneRegex.test(phone);
 
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Messaggio inviato con successo! Ti risponderò presto.', 'success');
-                this.reset();
-                submitButton.innerHTML = originalText;
-                submitButton.disabled = false;
-            }, 2000);
-        });
+        submitBtn.disabled = !(name && email && phone && phoneOk && subject && message);
     }
+
+    // ── Submit ────────────────────────────────────────────────
+    let pendingData = {};
+
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name    = document.getElementById('contact-name').value.trim();
+        const email   = document.getElementById('contact-email').value.trim();
+        const phone   = phoneInput.value.trim();
+        const subject = document.getElementById('contact-subject').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+
+        if (!isValidEmail(email)) {
+            showNotification('Inserisci un indirizzo email valido!', 'error');
+            return;
+        }
+
+        pendingData = { name, email, phone, subject, message };
+
+        const recapList = document.getElementById('confirm-recap-list');
+        recapList.innerHTML = `
+            <li><span class="recap-label"><i class="bi bi-person me-2"></i>Nome</span><span class="recap-value">${escapeHtml(name)}</span></li>
+            <li><span class="recap-label"><i class="bi bi-envelope me-2"></i>Email</span><span class="recap-value">${escapeHtml(email)}</span></li>
+            <li><span class="recap-label"><i class="bi bi-telephone me-2"></i>Telefono</span><span class="recap-value">${escapeHtml(phone)}</span></li>
+            <li><span class="recap-label"><i class="bi bi-chat-text me-2"></i>Oggetto</span><span class="recap-value">${escapeHtml(subject)}</span></li>
+            <li class="recap-message-item"><span class="recap-label"><i class="bi bi-text-paragraph me-2"></i>Messaggio</span><span class="recap-value recap-message-value">${escapeHtml(message)}</span></li>
+        `;
+
+        const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        confirmModal.show();
+    });
+
+    // ── Conferma e Invia ──────────────────────────────────────
+    document.getElementById('confirm-send-btn').addEventListener('click', function () {
+        const { name, email, phone, subject, message } = pendingData;
+        const confirmSendBtn = this;
+
+        bootstrap.Modal.getInstance(document.getElementById('confirmModal')).hide();
+
+        confirmSendBtn.disabled = true;
+        confirmSendBtn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Invio in corso...';
+
+        emailjs.send('service_1cq2f3k', 'template_iadvjet', {
+            from_name:  name,
+            from_email: email,
+            phone:      phone,
+            subject:    subject,
+            message:    message
+        })
+        .then(() => {
+            const now     = new Date();
+            const dateStr = now.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+            const timeStr = now.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('recap-card').innerHTML = `
+                <div class="recap-field">
+                    <span class="recap-field__label"><i class="bi bi-person-fill me-2" aria-hidden="true"></i>Nome</span>
+                    <span class="recap-field__value">${escapeHtml(name)}</span>
+                </div>
+                <div class="recap-field">
+                    <span class="recap-field__label"><i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>Email</span>
+                    <span class="recap-field__value">${escapeHtml(email)}</span>
+                </div>
+                <div class="recap-field">
+                    <span class="recap-field__label"><i class="bi bi-telephone-fill me-2" aria-hidden="true"></i>Telefono</span>
+                    <span class="recap-field__value">${escapeHtml(phone)}</span>
+                </div>
+                <div class="recap-field">
+                    <span class="recap-field__label"><i class="bi bi-chat-text-fill me-2" aria-hidden="true"></i>Oggetto</span>
+                    <span class="recap-field__value">${escapeHtml(subject)}</span>
+                </div>
+                <div class="recap-field recap-field--message">
+                    <span class="recap-field__label"><i class="bi bi-text-paragraph me-2" aria-hidden="true"></i>Messaggio</span>
+                    <span class="recap-field__value">${escapeHtml(message)}</span>
+                </div>
+                <div class="recap-field recap-field--timestamp">
+                    <span class="recap-field__label"><i class="bi bi-clock me-2" aria-hidden="true"></i>Inviato il</span>
+                    <span class="recap-field__value">${dateStr} alle ${timeStr}</span>
+                </div>
+            `;
+
+            const recapModal = new bootstrap.Modal(document.getElementById('recapModal'));
+            recapModal.show();
+            contactForm.reset();
+            submitBtn.disabled = true; // re-disabilita dopo reset
+        })
+        .catch((error) => {
+            console.error('EmailJS error:', error);
+            showNotification('Errore durante l\'invio. Riprova o contattami su WhatsApp.', 'error');
+        })
+        .finally(() => {
+            confirmSendBtn.disabled = false;
+            confirmSendBtn.innerHTML = '<i class="bi bi-send me-1"></i>Conferma e Invia';
+        });
+    });
+}
+
+// Escape HTML per sicurezza
+function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // Email validation helper
@@ -250,7 +357,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Observe skill cards, portfolio items, and other animated elements
-    const animatedElements = document.querySelectorAll('.skill-card, .portfolio-item, .about-content, .contact-info');
+    const animatedElements = document.querySelectorAll('.hero-badge, .hero-tech-stack, .hero-metric, .skill-card, .portfolio-item, .about-content, .contact-info');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
