@@ -256,7 +256,7 @@ select:focus {
 
 .hero-description {
   font-size: 1.25rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   opacity: 0.9;
 }
 
@@ -2005,7 +2005,7 @@ body {
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.32);
   backdrop-filter: blur(6px);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .hero-tech-stack {
