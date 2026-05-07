@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initSmoothScrolling();
     initContactForm();
     initScrollAnimations();
+    initProjectRequestModal();
 });
 
 // Navbar functionality
@@ -485,6 +486,48 @@ function initBackToTop() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
+        });
+    });
+}
+
+// Project Request Modal
+function initProjectRequestModal() {
+    const modal = new bootstrap.Modal(document.getElementById('projectRequestModal'));
+
+    document.querySelectorAll('.btn-request-project').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const project = this.dataset.project;
+            const stack = this.dataset.stack;
+            const icon = this.dataset.icon;
+
+            // Popola il modal
+            document.getElementById('prm-project-name').textContent = project;
+            document.getElementById('prm-icon').className = `bi ${icon}`;
+
+            // Genera chip stack
+            const chipsEl = document.getElementById('prm-stack-chips');
+            chipsEl.innerHTML = stack.split(',').map(s =>
+                `<span class="prm-chip">${s.trim()}</span>`
+            ).join('');
+
+            // Pre-compila l'oggetto e chiude la modale al click
+            document.getElementById('prm-go-contact').addEventListener('click', function (e) {
+                e.preventDefault();
+                const subjectInput = document.getElementById('contact-subject');
+                if (subjectInput) subjectInput.value = `Richiesta progetto: ${project}`;
+                modal.hide();
+                // Aspetta che la modale sia chiusa prima di scrollare
+                const modalEl = document.getElementById('projectRequestModal');
+                modalEl.addEventListener('hidden.bs.modal', function scrollOnClose() {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+                    modalEl.removeEventListener('hidden.bs.modal', scrollOnClose);
+                });
+            }, { once: true });
+
+            modal.show();
         });
     });
 }
