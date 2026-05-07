@@ -26,6 +26,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         (function () { emailjs.init({ publicKey: 'KfeKbfvg84r-kG6o0' }); })();
+        // Pre-compila oggetto se arrivato da prezzi.html
+        document.addEventListener('DOMContentLoaded', function () {
+            const subject = sessionStorage.getItem('quoteSubject');
+            if (subject) {
+                const el = document.getElementById('contact-subject');
+                if (el) el.value = subject;
+                sessionStorage.removeItem('quoteSubject');
+            }
+        });
     </script>
 
     <!-- Custom CSS -->
@@ -77,7 +86,7 @@
         <section id="home" class="hero-section">
             <div class="container">
                 <div class="row align-items-center min-vh-100">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start">
                         <div class="hero-content">
                             <span class="hero-badge">
                                 <i class="bi bi-stars me-2" aria-hidden="true"></i>
@@ -99,17 +108,13 @@
                                 <span class="hero-chip">TypeScript</span>
                                 <span class="hero-chip">Angular</span>
                             </div>
-                            <div class="hero-buttons">
-                                <a href="#portfolio" class="btn btn-hero-primary btn-lg me-3">I Miei Progetti</a>
-                                <a href="#contact" class="btn btn-hero-ghost btn-lg">Contattami</a>
-                            </div>
                             <div class="hero-metrics" aria-label="Risultati principali">
                                 <div class="hero-metric">
                                     <strong>50+</strong>
                                     <span>Progetti completati</span>
                                 </div>
                                 <div class="hero-metric">
-                                    <strong>3+ anni</strong>
+                                    <strong>4+ anni</strong>
                                     <span>Esperienza frontend</span>
                                 </div>
                                 <div class="hero-metric">
@@ -117,16 +122,14 @@
                                     <span>Accessibilità by design</span>
                                 </div>
                             </div>
-                            <div class="social-links mt-4">
-                                <a href="https://wa.me/+393405560275" class="social-link" target="_blank"
-                                    rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
-                                <a href="https://www.linkedin.com/feed/" class="social-link" target="_blank"
-                                    rel="noopener noreferrer"><i class="bi bi-linkedin"></i></a>
+                            <div class="hero-buttons">
+                                <a href="#portfolio" class="btn btn-hero-primary btn-lg me-3">I Miei Progetti</a>
+                                <a href="#contact" class="btn btn-hero-ghost btn-lg">Contattami</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="hero-image">
+                    <div class="col-lg-6 order-1 order-lg-2">
+                        <div class="hero-image hero-image--top">
                             <img src="assets/images/logo.png" alt="Illustrazione sviluppo web e programmazione"
                                 class="coding-image">
                         </div>
@@ -172,7 +175,7 @@
                                         <i class="bi bi-calendar-check text-primary"></i>
                                         <div>
                                             <h6>Esperienza</h6>
-                                            <p>3+ anni nel settore</p>
+                                            <p>4+ anni nel settore</p>
                                         </div>
                                     </div>
                                 </div>
@@ -194,10 +197,10 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-5 bg-light">
+        <section id="skills" class="py-5 bg-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 text-center mb-5">
+                    <div class="col-lg-12 text-center mb-lg-5 mb-2">
                         <h2 class="section-title">Le Mie Competenze</h2>
                         <div class="section-divider"></div>
                     </div>
@@ -330,7 +333,10 @@
                                     aria-label="Anteprima progetto E-commerce Website">
                                     <i class="bi bi-laptop" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="E-commerce Website"
+                                            data-stack="HTML, CSS, JavaScript, Bootstrap"
+                                            data-icon="bi-laptop">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +353,10 @@
                                     aria-label="Anteprima progetto Mobile App Landing">
                                     <i class="bi bi-phone" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="Mobile App Landing"
+                                            data-stack="Angular, SCSS, Bootstrap"
+                                            data-icon="bi-phone">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -360,10 +369,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <article class="portfolio-item" aria-label="Progetto Corporate Website">
                             <div class="portfolio-image">
-                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Corporate Website">
+                                <div class="placeholder-project" role="img"
+                                    aria-label="Anteprima progetto Corporate Website">
                                     <i class="bi bi-globe" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="Corporate Website"
+                                            data-stack="HTML5, CSS3, JavaScript"
+                                            data-icon="bi-globe">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -376,10 +389,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <article class="portfolio-item" aria-label="Progetto Creative Portfolio">
                             <div class="portfolio-image">
-                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Creative Portfolio">
+                                <div class="placeholder-project" role="img"
+                                    aria-label="Anteprima progetto Creative Portfolio">
                                     <i class="bi bi-brush" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="Creative Portfolio"
+                                            data-stack="Vue.js, SCSS, Animation"
+                                            data-icon="bi-brush">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -392,10 +409,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <article class="portfolio-item" aria-label="Progetto Dashboard Analytics">
                             <div class="portfolio-image">
-                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Dashboard Analytics">
+                                <div class="placeholder-project" role="img"
+                                    aria-label="Anteprima progetto Dashboard Analytics">
                                     <i class="bi bi-graph-up" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="Dashboard Analytics"
+                                            data-stack="Angular, Chart.js, Bootstrap"
+                                            data-icon="bi-graph-up">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -408,10 +429,14 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <article class="portfolio-item" aria-label="Progetto Blog Platform">
                             <div class="portfolio-image">
-                                <div class="placeholder-project" role="img" aria-label="Anteprima progetto Blog Platform">
+                                <div class="placeholder-project" role="img"
+                                    aria-label="Anteprima progetto Blog Platform">
                                     <i class="bi bi-journal-text" aria-hidden="true"></i>
                                     <div class="overlay">
-                                        <a href="#contact" class="btn btn-outline-light">Richiedi questo progetto</a>
+                                        <button class="btn btn-outline-light btn-request-project"
+                                            data-project="Blog Platform"
+                                            data-stack="JavaScript, CSS Grid, API"
+                                            data-icon="bi-journal-text">Richiedi questo progetto</button>
                                     </div>
                                 </div>
                             </div>
@@ -429,14 +454,14 @@
         <section id="contact" class="py-5 bg-dark text-light">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 text-center mb-5">
+                    <div class="col-lg-12 text-center mb-lg-5">
                         <h2 class="section-title text-light">Contattami</h2>
                         <div class="section-divider"></div>
                     </div>
                 </div>
                 <div class="row contact-equal">
                     <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="contact-info">
+                        <div class="contact-info mb-lg-0 mb-3">
                             <h4 class="mb-4">Iniziamo un progetto insieme!</h4>
                             <p class="mb-4">
                                 Hai un'idea per un progetto web? Collaboriamo per trasformarla in realtà!
@@ -446,14 +471,14 @@
                                 <i class="bi bi-envelope text-primary"></i>
                                 <div>
                                     <h6>Email</h6>
-                                    <p>antonellapirozzi1491@libero.it</p>
+                                    <p><a href="mailto:antonellapirozzi1491@libero.it" class="contact-link">antonellapirozzi1491@libero.it</a></p>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <i class="bi bi-phone text-primary"></i>
                                 <div>
                                     <h6>Telefono</h6>
-                                    <p>+39 340 556 0275</p>
+                                    <p><a href="tel:+393405560275" class="contact-link">+39 340 556 0275</a></p>
                                 </div>
                             </div>
                         </div>
@@ -479,8 +504,10 @@
                                     <label for="contact-phone" class="sr-only">Il tuo numero di telefono</label>
                                     <input type="tel" id="contact-phone" name="phone" class="form-control"
                                         placeholder="Numero di telefono" required aria-describedby="phone-error">
-                                    <div id="phone-error" class="form-field-error" role="alert" aria-live="polite" style="display:none;">
-                                        <i class="bi bi-exclamation-circle me-1"></i>Inserisci un numero valido (es. +39 333 1234567)
+                                    <div id="phone-error" class="form-field-error" role="alert" aria-live="polite"
+                                        style="display:none;">
+                                        <i class="bi bi-exclamation-circle me-1"></i>Inserisci un numero valido (es. +39
+                                        333 1234567)
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -505,7 +532,9 @@
                                 </div>
                                 <div id="error-message" class="alert alert-danger" style="display: none;">
                                     <i class="bi bi-exclamation-triangle me-2"></i>
-                                    Si è verificato un errore. Contattami direttamente via <a href="https://wa.me/+393405560275" class="alert-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>.
+                                    Si è verificato un errore. Contattami direttamente via <a
+                                        href="https://wa.me/+393405560275" class="alert-link" target="_blank"
+                                        rel="noopener noreferrer">WhatsApp</a>.
                                 </div>
                             </div>
 
@@ -527,14 +556,16 @@
     </main>
 
     <!-- Modale di Conferma -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-modal="true" role="dialog">
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-modal="true"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content confirm-modal-content">
                 <div class="modal-header border-0 pb-0">
                     <div class="confirm-modal-icon">
                         <i class="bi bi-send-check" aria-hidden="true"></i>
                     </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Chiudi"></button>
                 </div>
                 <div class="modal-body pt-2">
                     <h5 class="modal-title fw-bold mb-1" id="confirmModalLabel">Conferma invio messaggio</h5>
@@ -556,18 +587,21 @@
     </div>
 
     <!-- Modale di Recap -->
-    <div class="modal fade" id="recapModal" tabindex="-1" aria-labelledby="recapModalLabel" aria-modal="true" role="dialog">
+    <div class="modal fade" id="recapModal" tabindex="-1" aria-labelledby="recapModalLabel" aria-modal="true"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content recap-modal-content">
                 <div class="modal-header border-0 pb-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Chiudi"></button>
                 </div>
                 <div class="modal-body text-center px-4 pb-4">
                     <div class="recap-success-icon" aria-hidden="true">
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
                     <h4 class="fw-bold mt-3 mb-1" id="recapModalLabel">Messaggio inviato!</h4>
-                    <p class="recap-subtitle mb-4">Il tuo messaggio è stato inviato direttamente. Ecco il riepilogo completo.</p>
+                    <p class="recap-subtitle mb-4">Il tuo messaggio è stato inviato direttamente. Ecco il riepilogo
+                        completo.</p>
                     <div class="recap-card" id="recap-card">
                         <!-- filled by JS -->
                     </div>
@@ -588,22 +622,74 @@
         </div>
     </div>
 
+    <!-- Modal Richiesta Progetto -->
+    <div class="modal fade" id="projectRequestModal" tabindex="-1" aria-labelledby="projectRequestModalLabel"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content project-request-modal">
+                <button type="button" class="btn-close btn-close-white project-request-close"
+                    data-bs-dismiss="modal" aria-label="Chiudi"></button>
+
+                <!-- Header con icona e particelle -->
+                <div class="prm-header">
+                    <div class="prm-particles" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="prm-icon-wrap">
+                        <i class="bi prm-project-icon" id="prm-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="prm-badge">Nuovo Progetto</div>
+                </div>
+
+                <!-- Body -->
+                <div class="prm-body">
+                    <h4 class="prm-title" id="projectRequestModalLabel">
+                        Vuoi un progetto simile a<br>
+                        <span class="prm-project-name" id="prm-project-name"></span>?
+                    </h4>
+                    <p class="prm-desc">Parliamoci! Dimmi cosa hai in mente e costruiamo insieme la tua idea.</p>
+
+                    <div class="prm-stack-wrap">
+                        <span class="prm-stack-label">Tecnologie utilizzate</span>
+                        <div class="prm-stack-chips" id="prm-stack-chips"></div>
+                    </div>
+
+                    <div class="prm-steps">
+                        <div class="prm-step">
+                            <div class="prm-step-num">1</div>
+                            <span>Scrivi il tuo messaggio nel form contatti</span>
+                        </div>
+                        <div class="prm-step">
+                            <div class="prm-step-num">2</div>
+                            <span>Ricevi una risposta entro 24h</span>
+                        </div>
+                        <div class="prm-step">
+                            <div class="prm-step-num">3</div>
+                            <span>Definiamo insieme obiettivi e preventivo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="prm-footer">
+                    <button type="button" class="btn prm-btn-cancel" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Forse più tardi
+                    </button>
+                    <a href="#contact" class="btn prm-btn-confirm" id="prm-go-contact">
+                        <i class="bi bi-send me-1" aria-hidden="true"></i>Parliamone!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-dark text-light py-4" role="contentinfo" aria-label="Informazioni del sito">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2026 Frontend Developer. Tutti i diritti riservati.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <nav class="social-links" aria-label="Link social media nel footer">
-                        <a href="https://wa.me/+393405560275" class="social-link me-3" aria-label="WhatsApp"
-                            target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"
-                                aria-hidden="true"></i></a>
-                        <a href="https://www.linkedin.com/feed/" class="social-link" aria-label="LinkedIn"
-                            target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"
-                                aria-hidden="true"></i></a>
-                    </nav>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 footer-copy">&copy; 2026 Frontend Developer. Tutti i diritti riservati.</p>
                 </div>
             </div>
         </div>

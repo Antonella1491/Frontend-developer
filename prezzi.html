@@ -102,7 +102,7 @@
         <!-- Pricing Cards Section -->
         <section class="py-5 bg-light" id="pricing-plans" aria-label="Piani tariffari">
             <div class="container">
-                <div class="row">
+                <div class="row bg-white">
                     <!-- Pacchetto One-page -->
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card h-100 pricing-card border-0">
@@ -161,7 +161,11 @@
                                     <div class="delivery-row">
                                         <em class="delivery-text">Consegna in 7-10 giorni lavorativi</em>
                                     </div>
-                                    <a href="index.html#contact" class="btn btn-primary">Richiedi Preventivo</a>
+                                    <a href="index.html#contact" class="btn btn-primary btn-request-quote"
+                                        data-plan="One-page"
+                                        data-price="€350"
+                                        data-icon="bi-file-earmark-code"
+                                        data-delivery="7-10 giorni lavorativi">Richiedi Preventivo</a>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +229,11 @@
                                     <div class="delivery-row">
                                         <em class="delivery-text">Consegna in 14-20 giorni lavorativi</em>
                                     </div>
-                                    <a href="index.html#contact" class="btn btn-primary">Richiedi Preventivo</a>
+                                    <a href="index.html#contact" class="btn btn-primary btn-request-quote"
+                                        data-plan="Base Multipagina"
+                                        data-price="€600"
+                                        data-icon="bi-globe"
+                                        data-delivery="14-20 giorni lavorativi">Richiedi Preventivo</a>
                                 </div>
                             </div>
                         </div>
@@ -282,7 +290,11 @@
                                     <div class="delivery-row">
                                         <em class="delivery-text">Consegna in 20-30 giorni lavorativi</em>
                                     </div>
-                                    <a href="index.html#contact" class="btn btn-primary">Richiedi Preventivo</a>
+                                    <a href="index.html#contact" class="btn btn-primary btn-request-quote"
+                                        data-plan="Pro Multipagina"
+                                        data-price="€900"
+                                        data-icon="bi-building"
+                                        data-delivery="20-30 giorni lavorativi">Richiedi Preventivo</a>
                                 </div>
                             </div>
                         </div>
@@ -337,7 +349,11 @@
                                     <div class="delivery-row">
                                         <em class="delivery-text">Consegna in 30-45 giorni lavorativi</em>
                                     </div>
-                                    <a href="index.html#contact" class="btn btn-primary">Richiedi Preventivo</a>
+                                    <a href="index.html#contact" class="btn btn-primary btn-request-quote"
+                                        data-plan="Premium Multipagina"
+                                        data-price="€1500"
+                                        data-icon="bi-gem"
+                                        data-delivery="30-45 giorni lavorativi">Richiedi Preventivo</a>
                                 </div>
                             </div>
                         </div>
@@ -529,22 +545,111 @@
                 <div class="col-md-6">
                     <p class="mb-0">&copy; 2026 Frontend Developer. Tutti i diritti riservati.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <nav class="social-links" aria-label="Link social media nel footer">
-                        <a href="https://wa.me/+393405560275" class="social-link me-3" aria-label="WhatsApp"
-                            target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"
-                                aria-hidden="true"></i></a>
-                        <a href="https://www.linkedin.com/feed/" class="social-link" aria-label="LinkedIn"
-                            target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin"
-                                aria-hidden="true"></i></a>
-                    </nav>
-                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Modal Richiesta Preventivo -->
+    <div class="modal fade" id="quoteRequestModal" tabindex="-1" aria-labelledby="quoteRequestModalLabel"
+        aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content project-request-modal">
+                <button type="button" class="btn-close btn-close-white project-request-close"
+                    data-bs-dismiss="modal" aria-label="Chiudi"></button>
+
+                <div class="prm-header">
+                    <div class="prm-particles" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="prm-icon-wrap">
+                        <i class="bi prm-project-icon" id="qrm-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="prm-badge">Preventivo gratuito</div>
+                </div>
+
+                <div class="prm-body">
+                    <h4 class="prm-title" id="quoteRequestModalLabel">
+                        Hai scelto il pacchetto<br>
+                        <span class="prm-project-name" id="qrm-plan-name"></span>
+                    </h4>
+                    <p class="prm-desc">Ottima scelta! Contattami e riceverai un preventivo personalizzato entro 24h, senza impegno.</p>
+
+                    <div class="qrm-summary">
+                        <div class="qrm-info-row">
+                            <span class="qrm-label"><i class="bi bi-tag me-1"></i>Prezzo base</span>
+                            <span class="qrm-value" id="qrm-price"></span>
+                        </div>
+                        <div class="qrm-info-row">
+                            <span class="qrm-label"><i class="bi bi-clock me-1"></i>Consegna stimata</span>
+                            <span class="qrm-value" id="qrm-delivery"></span>
+                        </div>
+                    </div>
+
+                    <div class="prm-steps">
+                        <div class="prm-step">
+                            <div class="prm-step-num">1</div>
+                            <span>Scrivi la tua idea nel form contatti</span>
+                        </div>
+                        <div class="prm-step">
+                            <div class="prm-step-num">2</div>
+                            <span>Ricevi un preventivo chiaro entro 24h</span>
+                        </div>
+                        <div class="prm-step">
+                            <div class="prm-step-num">3</div>
+                            <span>Iniziamo quando sei pronto/a</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prm-footer">
+                    <button type="button" class="btn prm-btn-cancel" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Forse più tardi
+                    </button>
+                    <a href="index.html#contact" class="btn prm-btn-confirm" id="qrm-go-contact">
+                        <i class="bi bi-send me-1" aria-hidden="true"></i>Parliamone!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = new bootstrap.Modal(document.getElementById('quoteRequestModal'));
+
+            document.querySelectorAll('.btn-request-quote').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const plan = this.dataset.plan;
+                    const price = this.dataset.price;
+                    const icon = this.dataset.icon;
+                    const delivery = this.dataset.delivery;
+
+                    document.getElementById('qrm-plan-name').textContent = plan;
+                    document.getElementById('qrm-icon').className = `bi ${icon}`;
+                    document.getElementById('qrm-price').textContent = price + ' una tantum';
+                    document.getElementById('qrm-delivery').textContent = delivery;
+
+                    // Al click su Parliamone: chiude modal e porta al form con oggetto pre-compilato
+                    document.getElementById('qrm-go-contact').addEventListener('click', function () {
+                        modal.hide();
+                        const modalEl = document.getElementById('quoteRequestModal');
+                        modalEl.addEventListener('hidden.bs.modal', function onHidden() {
+                            sessionStorage.setItem('quoteSubject', 'Preventivo pacchetto: ' + plan);
+                            window.location.href = 'index.html#contact';
+                            modalEl.removeEventListener('hidden.bs.modal', onHidden);
+                        });
+                    }, { once: true });
+
+                    modal.show();
+                });
+            });
+        });
+    </script>
 
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
