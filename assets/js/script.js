@@ -516,7 +516,11 @@ function initProjectRequestModal() {
             document.getElementById('prm-go-contact').addEventListener('click', function (e) {
                 e.preventDefault();
                 const subjectInput = document.getElementById('contact-subject');
-                if (subjectInput) subjectInput.value = `Richiesta progetto: ${project}`;
+                if (subjectInput) {
+                    subjectInput.value = `Richiesta progetto: ${project}`;
+                    subjectInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    subjectInput.dispatchEvent(new Event('change', { bubbles: true }));
+                }
                 modal.hide();
                 // Aspetta che la modale sia chiusa prima di scrollare
                 const modalEl = document.getElementById('projectRequestModal');
