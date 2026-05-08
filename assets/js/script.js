@@ -566,6 +566,10 @@ function initPrezziPage() {
     });
 
     document.getElementById('agw-no-btn').addEventListener('click', function () {
+        // Prevent the modal focus-restoration from sending focus back to the addon "Aggiungi" button
+        const gatewayModalEl = document.getElementById('addonGatewayModal');
+        if (gatewayModalEl) gatewayModalEl._triggerElement = null;
+
         gatewayModal.hide();
         document.getElementById('pricing-plans').scrollIntoView({ behavior: 'smooth' });
         setTimeout(() => {
@@ -573,7 +577,11 @@ function initPrezziPage() {
                 c.classList.add('pricing-card--pulse');
                 setTimeout(() => c.classList.remove('pricing-card--pulse'), 2600);
             });
-        }, 600);
+            const firstRequestQuoteButton = document.querySelector('.btn-request-quote');
+            if (firstRequestQuoteButton) {
+                try { firstRequestQuoteButton.focus(); } catch (e) {}
+            }
+        }, 700);
     });
 
     document.getElementById('agw-confirm-btn').addEventListener('click', function () {
@@ -725,12 +733,33 @@ function initPrezziPage() {
     function updateStickyBar() {
         const count = selectedAddons.size;
         stickyBar.classList.toggle('is-visible', count > 0);
+        const stickyButton = document.getElementById('addon-sticky-btn');
         if (count > 0) {
             stickyCount.textContent = count;
             const total = [...selectedAddons.values()].reduce((s, a) => s + a.priceNum, 0);
             stickyTotal.textContent = '+€' + total + ' di servizi aggiuntivi';
+            stickyButton.removeAttribute('tabindex'); // Make button focusable
+        } else {
+            stickyButton.setAttribute('tabindex', '-1'); // Make button unfocusable
         }
     }
+
+    // Ensure sticky bar is only visible when explicitly triggered
+    const addAddonButtons = document.querySelectorAll('.add-addon-btn'); // Assuming buttons to add addons have this class
+
+    addAddonButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const count = selectedAddons.size;
+            if (count > 0) {
+                stickyBar.classList.add('is-visible');
+                document.getElementById('addon-sticky-btn').removeAttribute('tabindex');
+            }
+        });
+    });
+
+    // Hide sticky bar by default
+    stickyBar.classList.remove('is-visible');
+    document.getElementById('addon-sticky-btn').setAttribute('tabindex', '-1');
 
     document.getElementById('addon-sticky-btn').addEventListener('click', function () {
         document.getElementById('quoteRequestModal')._triggerElement = this;
