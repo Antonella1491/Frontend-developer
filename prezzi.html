@@ -552,7 +552,7 @@
     <!-- Modal Richiesta Preventivo -->
     <div class="modal fade" id="quoteRequestModal" tabindex="-1" aria-labelledby="quoteRequestModalLabel"
         aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content project-request-modal">
                 <button type="button" class="btn-close btn-close-white project-request-close"
                     data-bs-dismiss="modal" aria-label="Chiudi"></button>
@@ -564,17 +564,17 @@
                     <div class="prm-icon-wrap">
                         <i class="bi prm-project-icon" id="qrm-icon" aria-hidden="true"></i>
                     </div>
-                    <div class="prm-badge">Preventivo gratuito</div>
+                    <div class="prm-badge" id="qrm-badge">Preventivo gratuito</div>
                 </div>
 
                 <div class="prm-body">
                     <h4 class="prm-title" id="quoteRequestModalLabel">
-                        Hai scelto il pacchetto<br>
+                        <span id="qrm-title-text">Hai scelto il pacchetto</span><br>
                         <span class="prm-project-name" id="qrm-plan-name"></span>
                     </h4>
-                    <p class="prm-desc">Ottima scelta! Contattami e riceverai un preventivo personalizzato entro 24h, senza impegno.</p>
+                    <p class="prm-desc" id="qrm-desc">Ottima scelta! Puoi anche aggiungere servizi extra qui sotto, poi ti rispondo entro 24h.</p>
 
-                    <div class="qrm-summary">
+                    <div class="qrm-summary" id="qrm-summary">
                         <div class="qrm-info-row">
                             <span class="qrm-label"><i class="bi bi-tag me-1"></i>Prezzo base</span>
                             <span class="qrm-value" id="qrm-price"></span>
@@ -585,7 +585,22 @@
                         </div>
                     </div>
 
-                    <div class="prm-steps">
+                    <!-- Addon interattivi dentro la modale -->
+                    <div class="qrm-inline-addons" id="qrm-inline-addons">
+                        <div class="prm-stack-label" style="margin-bottom:.5rem">
+                            <i class="bi bi-plus-square me-1" aria-hidden="true"></i>Vuoi aggiungere qualcosa?
+                        </div>
+                        <div id="qrm-inline-addon-list" class="qrm-inline-addon-list"></div>
+                    </div>
+
+                    <!-- Riepilogo addon selezionati -->
+                    <div class="qrm-addons" id="qrm-addons" style="display:none;" aria-label="Servizi aggiuntivi selezionati">
+                        <div class="prm-stack-label">Servizi aggiuntivi selezionati</div>
+                        <div id="qrm-addons-list" class="qrm-addons-list"></div>
+                        <div class="qrm-addons-total" id="qrm-addons-total"></div>
+                    </div>
+
+                    <div class="prm-steps" id="qrm-steps">
                         <div class="prm-step">
                             <div class="prm-step-num">1</div>
                             <span>Scrivi la tua idea nel form contatti</span>
@@ -599,9 +614,9 @@
                             <span>Iniziamo quando sei pronto/a</span>
                         </div>
                     </div>
-                </div>
+                </div><!-- /.prm-body -->
 
-                <div class="prm-footer">
+                <div class="qrm-sticky-footer">
                     <button type="button" class="btn prm-btn-cancel" data-bs-dismiss="modal">
                         <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Forse più tardi
                     </button>
@@ -609,7 +624,88 @@
                         <i class="bi bi-send me-1" aria-hidden="true"></i>Parliamone!
                     </a>
                 </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- Modal Gateway Addon (hai già un pacchetto?) -->
+    <div class="modal fade" id="addonGatewayModal" tabindex="-1" aria-labelledby="addonGatewayLabel" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
+            <div class="modal-content project-request-modal">
+                <button type="button" class="btn-close btn-close-white project-request-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+
+                <div class="prm-header" style="padding:1.6rem 1.5rem 1.2rem">
+                    <div class="prm-particles" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="prm-icon-wrap">
+                        <i class="bi bi-question-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="prm-badge">Servizi extra</div>
+                </div>
+
+                <div class="prm-body" style="padding:1.4rem 1.5rem">
+                    <h4 class="prm-title" style="font-size:1.1rem;margin-bottom:.5rem" id="addonGatewayLabel">
+                        Hai già un pacchetto <span class="prm-project-name" id="agw-addon-name"></span>?
+                    </h4>
+                    <p class="prm-desc" style="font-size:.83rem;margin-bottom:1.2rem">
+                        Dimmi se hai già acquistato un pacchetto: in quel caso aggiungo il servizio al tuo progetto, altrimenti ti porto a scegliere un piano.
+                    </p>
+
+                    <!-- Ramo SÌ: scegli / cerca pacchetto -->
+                    <div id="agw-yes-panel" style="display:none">
+                        <label class="agw-label" for="agw-project-name">Pacchetto acquistato</label>
+                        <div class="agw-combo" id="agw-combo">
+                            <div class="agw-combo__input-wrap">
+                                <i class="bi bi-search agw-combo__icon" aria-hidden="true"></i>
+                                <input type="text" id="agw-project-name" class="agw-input agw-combo__input"
+                                    placeholder="Cerca o scrivi il nome del pacchetto…"
+                                    autocomplete="off" role="combobox"
+                                    aria-expanded="false" aria-controls="agw-combo-list" aria-autocomplete="list">
+                            </div>
+                            <ul class="agw-combo__list" id="agw-combo-list" role="listbox" aria-label="Pacchetti disponibili"></ul>
+                        </div>
+                        <div class="agw-actions" style="margin-top:1rem">
+                            <button type="button" class="btn prm-btn-cancel" id="agw-back-btn">
+                                <i class="bi bi-arrow-left me-1"></i>Indietro
+                            </button>
+                            <button type="button" class="btn prm-btn-confirm" id="agw-confirm-btn">
+                                <i class="bi bi-check2 me-1"></i>Aggiungi al progetto
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ramo scelta iniziale -->
+                    <div id="agw-choice-panel">
+                        <div class="agw-choices">
+                            <button type="button" class="agw-choice-btn" id="agw-yes-btn">
+                                <i class="bi bi-check-circle" aria-hidden="true"></i>
+                                <span>Sì, ho già un pacchetto</span>
+                            </button>
+                            <button type="button" class="agw-choice-btn agw-choice-btn--no" id="agw-no-btn">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                                <span>No, voglio scegliere un piano</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Sticky Addon Bar -->
+    <div class="addon-sticky-bar" id="addon-sticky-bar" role="status" aria-live="polite" aria-label="Servizi aggiuntivi selezionati">
+        <div class="addon-sticky-bar__inner container">
+            <div class="addon-sticky-bar__info">
+                <span class="addon-sticky-bar__count" id="addon-sticky-count">0</span>
+                <div>
+                    <div class="addon-sticky-bar__label">servizi aggiuntivi selezionati</div>
+                    <div class="addon-sticky-bar__total" id="addon-sticky-total"></div>
+                </div>
+            </div>
+            <button class="btn addon-sticky-bar__btn" id="addon-sticky-btn" type="button">
+                <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>Includi nel preventivo
+            </button>
         </div>
     </div>
 
@@ -619,33 +715,346 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const modal = new bootstrap.Modal(document.getElementById('quoteRequestModal'));
+            const selectedAddons = new Map(); // name → { price, priceNum, iconCls }
+            let lastPlanData = null;
 
+            // ── Leggo le addon-card una volta sola ─────────────────────────
+            const allAddons = [];
+            document.querySelectorAll('.addon-card').forEach(card => {
+                const btn      = card.querySelector('.btn-addon');
+                const name     = card.querySelector('h5').textContent.trim();
+                const priceEl  = card.querySelector('.addon-card__price');
+                const iconEl   = card.querySelector('.addon-card__icon i');
+                const priceNum = priceEl ? parseInt(priceEl.textContent.replace(/[^0-9]/g, '')) || 0 : 0;
+                const priceStr = priceEl ? priceEl.textContent.trim() : '';
+                const iconCls  = iconEl  ? [...iconEl.classList].find(c => c.startsWith('bi-')) || '' : '';
+                allAddons.push({ name, priceNum, priceStr, iconCls, card, btn });
+            });
+
+            // ── Sincronizza stato visivo card esterna ───────────────────────
+            function syncCardState(name, selected) {
+                const entry = allAddons.find(a => a.name === name);
+                if (!entry) return;
+                entry.card.classList.toggle('addon-card--selected', selected);
+                entry.btn.classList.toggle('btn-addon--selected', selected);
+                entry.btn.innerHTML = selected
+                    ? '<i class="bi bi-check2 me-1"></i>Selezionato'
+                    : 'Aggiungi';
+            }
+
+            // ── Gateway modale ───────────────────────────────────────────────
+            const gatewayModal  = new bootstrap.Modal(document.getElementById('addonGatewayModal'));
+            let pendingAddon    = null; // addon in attesa della scelta nel gateway
+
+            document.getElementById('agw-yes-btn').addEventListener('click', function () {
+                document.getElementById('agw-choice-panel').style.display = 'none';
+                document.getElementById('agw-yes-panel').style.display    = 'block';
+                document.getElementById('agw-project-name').focus();
+            });
+
+            document.getElementById('agw-back-btn').addEventListener('click', function () {
+                document.getElementById('agw-yes-panel').style.display    = 'none';
+                document.getElementById('agw-choice-panel').style.display = 'block';
+            });
+
+            document.getElementById('agw-no-btn').addEventListener('click', function () {
+                gatewayModal.hide();
+                // Porta l'utente alle card dei piani con animazione
+                document.getElementById('pricing-plans').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    document.querySelectorAll('.pricing-card').forEach(c => {
+                        c.classList.add('pricing-card--pulse');
+                        setTimeout(() => c.classList.remove('pricing-card--pulse'), 2600);
+                    });
+                }, 600);
+            });
+
+            document.getElementById('agw-confirm-btn').addEventListener('click', function () {
+                const projectName = document.getElementById('agw-project-name').value.trim();
+                if (!projectName) {
+                    document.getElementById('agw-project-name').focus();
+                    return;
+                }
+                // Aggiungi l'addon pendente alla mappa
+                if (pendingAddon) {
+                    selectedAddons.set(pendingAddon.name, {
+                        price: pendingAddon.priceStr,
+                        priceNum: pendingAddon.priceNum,
+                        iconCls: pendingAddon.iconCls
+                    });
+                    syncCardState(pendingAddon.name, true);
+                    updateStickyBar();
+                }
+                gatewayModal.hide();
+                // Apri la modale preventivo in modalità addon-only con il progetto come contesto
+                openModal(null, projectName);
+            });
+
+            // ── Combobox pacchetti nel gateway ───────────────────────────────
+            const PLANS = [
+                { label: 'One-page',           icon: 'bi-file-earmark' },
+                { label: 'Base Multipagina',   icon: 'bi-files' },
+                { label: 'Pro Multipagina',    icon: 'bi-layers' },
+                { label: 'Premium Multipagina',icon: 'bi-stars' },
+            ];
+
+            const comboInput = document.getElementById('agw-project-name');
+            const comboList  = document.getElementById('agw-combo-list');
+            let comboOpen    = false;
+            let activeIdx    = -1;
+
+            function renderCombo(filter) {
+                const q = (filter || '').toLowerCase();
+                const results = PLANS.filter(p => p.label.toLowerCase().includes(q));
+                comboList.innerHTML = results.length
+                    ? results.map((p, i) => `
+                        <li class="agw-combo__item" role="option" data-label="${p.label}" tabindex="-1" aria-selected="false">
+                            <i class="bi ${p.icon}" aria-hidden="true"></i>
+                            <span>${highlight(p.label, q)}</span>
+                        </li>`).join('')
+                    : `<li class="agw-combo__item agw-combo__item--empty" role="option" aria-disabled="true">
+                            <i class="bi bi-slash-circle" aria-hidden="true"></i><span>Nessun pacchetto trovato</span>
+                       </li>`;
+
+                comboList.querySelectorAll('.agw-combo__item:not(.agw-combo__item--empty)').forEach(li => {
+                    li.addEventListener('mousedown', function (e) {
+                        e.preventDefault();
+                        selectPlan(this.dataset.label);
+                    });
+                });
+                activeIdx = -1;
+            }
+
+            function highlight(text, q) {
+                if (!q) return text;
+                return text.replace(new RegExp(`(${q})`, 'gi'), '<mark>$1</mark>');
+            }
+
+            function selectPlan(label) {
+                comboInput.value = label;
+                closeCombo();
+                comboInput.focus();
+            }
+
+            function openCombo() {
+                renderCombo(comboInput.value);
+                comboList.classList.add('agw-combo__list--open');
+                comboInput.setAttribute('aria-expanded', 'true');
+                comboOpen = true;
+            }
+
+            function closeCombo() {
+                comboList.classList.remove('agw-combo__list--open');
+                comboInput.setAttribute('aria-expanded', 'false');
+                comboOpen = false;
+                activeIdx = -1;
+            }
+
+            comboInput.addEventListener('focus', () => openCombo());
+            comboInput.addEventListener('input', () => {
+                if (!comboOpen) openCombo();
+                else renderCombo(comboInput.value);
+            });
+            comboInput.addEventListener('blur', () => setTimeout(closeCombo, 150));
+
+            comboInput.addEventListener('keydown', function (e) {
+                const items = [...comboList.querySelectorAll('.agw-combo__item:not(.agw-combo__item--empty)')];
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeIdx = Math.min(activeIdx + 1, items.length - 1);
+                    items.forEach((el, i) => el.classList.toggle('agw-combo__item--active', i === activeIdx));
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeIdx = Math.max(activeIdx - 1, 0);
+                    items.forEach((el, i) => el.classList.toggle('agw-combo__item--active', i === activeIdx));
+                } else if (e.key === 'Enter' && activeIdx >= 0) {
+                    e.preventDefault();
+                    selectPlan(items[activeIdx].dataset.label);
+                } else if (e.key === 'Escape') {
+                    closeCombo();
+                }
+            });
+
+            // Reset combobox al close del gateway
+            document.getElementById('addonGatewayModal').addEventListener('hidden.bs.modal', function () {
+                document.getElementById('agw-yes-panel').style.display    = 'none';
+                document.getElementById('agw-choice-panel').style.display = 'block';
+                document.getElementById('agw-project-name').value         = '';
+                pendingAddon = null;
+            });
+
+            // ── Toggle addon dalle card esterne ─────────────────────────────
+            allAddons.forEach(({ name, priceNum, priceStr, iconCls, btn }) => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const wasSelected = selectedAddons.has(name);
+
+                    if (wasSelected) {
+                        // Deseleziona direttamente
+                        selectedAddons.delete(name);
+                        syncCardState(name, false);
+                        updateStickyBar();
+                        if (document.getElementById('quoteRequestModal').classList.contains('show')) {
+                            refreshInlineAddons();
+                            refreshAddonSummary();
+                        }
+                        return;
+                    }
+
+                    // Se la modale preventivo è già aperta, aggiungi direttamente
+                    if (document.getElementById('quoteRequestModal').classList.contains('show')) {
+                        selectedAddons.set(name, { price: priceStr, priceNum, iconCls });
+                        syncCardState(name, true);
+                        updateStickyBar();
+                        refreshInlineAddons();
+                        refreshAddonSummary();
+                        return;
+                    }
+
+                    // Altrimenti apri il gateway
+                    pendingAddon = { name, priceNum, priceStr, iconCls };
+                    document.getElementById('agw-addon-name').textContent = '"' + name + '"';
+                    gatewayModal.show();
+                });
+            });
+
+            // ── Sticky bar ──────────────────────────────────────────────────
+            const stickyBar   = document.getElementById('addon-sticky-bar');
+            const stickyCount = document.getElementById('addon-sticky-count');
+            const stickyTotal = document.getElementById('addon-sticky-total');
+
+            function updateStickyBar() {
+                const count = selectedAddons.size;
+                stickyBar.classList.toggle('is-visible', count > 0);
+                if (count > 0) {
+                    stickyCount.textContent = count;
+                    const total = [...selectedAddons.values()].reduce((s, a) => s + a.priceNum, 0);
+                    stickyTotal.textContent = '+€' + total + ' di servizi aggiuntivi';
+                }
+            }
+
+            document.getElementById('addon-sticky-btn').addEventListener('click', function () {
+                openModal(lastPlanData); // null = solo addon
+            });
+
+            // ── Chip inline dentro la modale ────────────────────────────────
+            function refreshInlineAddons() {
+                const container = document.getElementById('qrm-inline-addon-list');
+                container.innerHTML = allAddons.map(a => {
+                    const sel = selectedAddons.has(a.name);
+                    return `
+                        <div class="qrm-inline-addon-item${sel ? ' qrm-inline-addon-item--selected' : ''}" data-name="${a.name}">
+                            <div class="qrm-inline-addon-info">
+                                <i class="bi ${a.iconCls}" aria-hidden="true"></i>
+                                <span>${a.name}</span>
+                            </div>
+                            <div class="qrm-inline-addon-right">
+                                <span class="qrm-inline-addon-price">${a.priceStr}</span>
+                                <button type="button" class="qrm-inline-addon-btn${sel ? ' qrm-inline-addon-btn--sel' : ''}" aria-pressed="${sel}">
+                                    ${sel ? '<i class="bi bi-check2"></i>' : '<i class="bi bi-plus-lg"></i>'}
+                                </button>
+                            </div>
+                        </div>`;
+                }).join('');
+
+                container.querySelectorAll('.qrm-inline-addon-item').forEach(item => {
+                    item.querySelector('.qrm-inline-addon-btn').addEventListener('click', function () {
+                        const name = item.dataset.name;
+                        const addonData = allAddons.find(a => a.name === name);
+                        if (selectedAddons.has(name)) {
+                            selectedAddons.delete(name);
+                            syncCardState(name, false);
+                        } else {
+                            selectedAddons.set(name, { price: addonData.priceStr, priceNum: addonData.priceNum, iconCls: addonData.iconCls });
+                            syncCardState(name, true);
+                        }
+                        updateStickyBar();
+                        refreshInlineAddons();
+                        refreshAddonSummary();
+                    });
+                });
+            }
+
+            // ── Riepilogo addon ─────────────────────────────────────────────
+            function refreshAddonSummary() {
+                const wrap = document.getElementById('qrm-addons');
+                if (selectedAddons.size > 0) {
+                    const total = [...selectedAddons.values()].reduce((s, a) => s + a.priceNum, 0);
+                    document.getElementById('qrm-addons-list').innerHTML =
+                        [...selectedAddons.entries()].map(([n, a]) =>
+                            `<div class="qrm-addon-item"><span><i class="bi bi-plus-circle me-1"></i>${n}</span><span>${a.price}</span></div>`
+                        ).join('');
+                    document.getElementById('qrm-addons-total').innerHTML =
+                        `<span>Totale aggiuntivi</span><span>+€${total}</span>`;
+                    wrap.style.display = 'block';
+                } else {
+                    wrap.style.display = 'none';
+                }
+            }
+
+            // ── Apertura modale ─────────────────────────────────────────────
+            let addonOnlyProject = ''; // nome progetto in modalità solo-addon
+
+            function openModal(data, projectContext) {
+                lastPlanData = data;
+                addonOnlyProject = projectContext || '';
+                const addonOnly = !data;
+
+                document.getElementById('qrm-icon').className = 'bi ' + (addonOnly ? 'bi-plus-square' : data.icon);
+                document.getElementById('qrm-badge').textContent = addonOnly ? 'Servizi extra' : 'Preventivo gratuito';
+                document.getElementById('qrm-title-text').textContent = addonOnly ? 'Aggiungi servizi extra' : 'Hai scelto il pacchetto';
+                document.getElementById('qrm-plan-name').textContent = addonOnly
+                    ? (addonOnlyProject ? 'Progetto: ' + addonOnlyProject : '')
+                    : data.plan;
+                document.getElementById('qrm-desc').textContent = addonOnly
+                    ? (addonOnlyProject
+                        ? 'Aggiungo i servizi selezionati al tuo progetto “' + addonOnlyProject + '” e ti preparo un preventivo personalizzato.'
+                        : 'Hai già un sito o un pacchetto? Scegli i servizi extra e ti contatto per un preventivo.')
+                    : 'Ottima scelta! Puoi aggiungere servizi extra qui sotto, poi ti rispondo entro 24h.';
+
+                const summaryEl = document.getElementById('qrm-summary');
+                if (!addonOnly) {
+                    document.getElementById('qrm-price').textContent    = data.price + ' una tantum';
+                    document.getElementById('qrm-delivery').textContent = data.delivery;
+                    summaryEl.style.display = '';
+                } else {
+                    summaryEl.style.display = 'none';
+                }
+
+                refreshInlineAddons();
+                refreshAddonSummary();
+                modal.show();
+            }
+
+            // ── Parliamone ──────────────────────────────────────────────────
+            document.getElementById('qrm-go-contact').addEventListener('click', function (e) {
+                e.preventDefault();
+                let subject;
+                if (lastPlanData) {
+                    subject = 'Preventivo pacchetto: ' + lastPlanData.plan;
+                    if (selectedAddons.size > 0)
+                        subject += ' + ' + [...selectedAddons.keys()].join(', ');
+                } else if (selectedAddons.size > 0) {
+                    subject = addonOnlyProject
+                        ? 'Servizi extra per “' + addonOnlyProject + '”: ' + [...selectedAddons.keys()].join(', ')
+                        : 'Servizi extra: ' + [...selectedAddons.keys()].join(', ');
+                } else {
+                    subject = 'Richiesta informazioni';
+                }
+                sessionStorage.setItem('quoteSubject', subject);
+                window.location.href = 'home.html#contact';
+            });
+
+            // ── Bottoni "Richiedi Preventivo" sulle card piano ──────────────
             document.querySelectorAll('.btn-request-quote').forEach(btn => {
                 btn.addEventListener('click', function (e) {
                     e.preventDefault();
-
-                    const plan = this.dataset.plan;
-                    const price = this.dataset.price;
-                    const icon = this.dataset.icon;
-                    const delivery = this.dataset.delivery;
-
-                    document.getElementById('qrm-plan-name').textContent = plan;
-                    document.getElementById('qrm-icon').className = `bi ${icon}`;
-                    document.getElementById('qrm-price').textContent = price + ' una tantum';
-                    document.getElementById('qrm-delivery').textContent = delivery;
-
-                    // Al click su Parliamone: chiude modal e porta al form con oggetto pre-compilato
-                    document.getElementById('qrm-go-contact').addEventListener('click', function () {
-                        modal.hide();
-                        const modalEl = document.getElementById('quoteRequestModal');
-                        modalEl.addEventListener('hidden.bs.modal', function onHidden() {
-                            sessionStorage.setItem('quoteSubject', 'Preventivo pacchetto: ' + plan);
-                            window.location.href = 'home.html#contact';
-                            modalEl.removeEventListener('hidden.bs.modal', onHidden);
-                        });
-                    }, { once: true });
-
-                    modal.show();
+                    openModal({
+                        plan:     this.dataset.plan,
+                        price:    this.dataset.price,
+                        icon:     this.dataset.icon,
+                        delivery: this.dataset.delivery
+                    });
                 });
             });
         });

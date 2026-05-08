@@ -22,11 +22,12 @@
 
         <div class="logo-ring" aria-hidden="true">
             <svg class="logo-ring__svg" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="90" cy="90" r="86" stroke="url(#ringGrad)" stroke-width="2" stroke-dasharray="12 6" stroke-linecap="round"/>
+                <circle cx="90" cy="90" r="86" stroke="url(#ringGrad)" stroke-width="2" stroke-dasharray="12 6"
+                    stroke-linecap="round" />
                 <defs>
                     <linearGradient id="ringGrad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#667eea"/>
-                        <stop offset="100%" stop-color="#764ba2" stop-opacity="0.3"/>
+                        <stop offset="0%" stop-color="#667eea" />
+                        <stop offset="100%" stop-color="#764ba2" stop-opacity="0.3" />
                     </linearGradient>
                 </defs>
             </svg>
@@ -42,7 +43,8 @@
         <a href="home.html" class="splash-btn" aria-label="Entra nel portfolio">
             Entra nel sito
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
             </svg>
         </a>
 
@@ -53,10 +55,10 @@
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let W, H, dots;
-        const COLORS = ['#667eea','#764ba2','#a78bfa','#818cf8'];
+        const COLORS = ['#667eea', '#764ba2', '#a78bfa', '#818cf8'];
 
         function resize() {
-            W = canvas.width  = window.innerWidth;
+            W = canvas.width = window.innerWidth;
             H = canvas.height = window.innerHeight;
         }
         function isMobile() { return window.innerWidth < 600; }
@@ -72,7 +74,7 @@
         }
         function draw() {
             ctx.clearRect(0, 0, W, H);
-            const bg = ctx.createRadialGradient(W*.3, H*.3, 0, W*.3, H*.3, W*.9);
+            const bg = ctx.createRadialGradient(W * .3, H * .3, 0, W * .3, H * .3, W * .9);
             bg.addColorStop(0, 'rgba(28,18,72,0.98)');
             bg.addColorStop(1, 'rgba(8,6,26,1)');
             ctx.fillStyle = bg;
@@ -84,20 +86,20 @@
                 if (d.x < 0 || d.x > W) d.vx *= -1;
                 if (d.y < 0 || d.y > H) d.vy *= -1;
                 ctx.beginPath();
-                ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+                ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
                 ctx.fillStyle = d.color;
                 ctx.globalAlpha = d.alpha;
                 ctx.fill();
-                for (let j = i+1; j < dots.length; j++) {
+                for (let j = i + 1; j < dots.length; j++) {
                     const o = dots[j];
-                    const dx = d.x-o.x, dy = d.y-o.y;
-                    const dist = Math.sqrt(dx*dx+dy*dy);
+                    const dx = d.x - o.x, dy = d.y - o.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < MAX) {
                         ctx.beginPath();
                         ctx.moveTo(d.x, d.y);
                         ctx.lineTo(o.x, o.y);
                         ctx.strokeStyle = '#667eea';
-                        ctx.globalAlpha = (1 - dist/MAX) * 0.12;
+                        ctx.globalAlpha = (1 - dist / MAX) * 0.12;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
@@ -113,4 +115,5 @@
     </script>
 
 </body>
+
 </html>

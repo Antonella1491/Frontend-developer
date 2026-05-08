@@ -31,7 +31,11 @@
             const subject = sessionStorage.getItem('quoteSubject');
             if (subject) {
                 const el = document.getElementById('contact-subject');
-                if (el) el.value = subject;
+                if (el) {
+                    el.value = subject;
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                }
                 sessionStorage.removeItem('quoteSubject');
             }
         });
