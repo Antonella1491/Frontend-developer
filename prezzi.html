@@ -100,7 +100,7 @@
         </section>
 
         <!-- Pricing Cards Section -->
-        <section class="py-5 bg-light" id="pricing-plans" aria-label="Piani tariffari">
+        <section class="py-5 bg-white" id="pricing-plans" aria-label="Piani tariffari">
             <div class="container">
                 <div class="row bg-white">
                     <!-- Pacchetto One-page -->
@@ -1062,6 +1062,39 @@
 
     <!-- Custom JS -->
     <script src="assets/js/script.js"></script>
+
+    <script>
+        /* ── Gestione focus modale (prezzi.html) ──
+           Valido per tutte le modali Bootstrap della pagina:
+           - show.bs.modal  → salva il trigger (elemento attualmente focused)
+           - shown.bs.modal → sposta focus sulla × (o primo focusable)
+           - hidden.bs.modal → riporta focus al trigger
+        ------------------------------------------------ */
+        document.querySelectorAll('.modal').forEach(function (modalEl) {
+            var triggerEl = null;
+
+            modalEl.addEventListener('show.bs.modal', function () {
+                triggerEl = document.activeElement;
+            });
+
+            modalEl.addEventListener('shown.bs.modal', function () {
+                var closeBtn   = modalEl.querySelector('.btn-close, .project-request-close');
+                var firstInput = modalEl.querySelector('input:not([disabled]), textarea:not([disabled])');
+                var firstAny   = modalEl.querySelector(
+                    'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                );
+                var target = closeBtn || firstInput || firstAny;
+                if (target) target.focus();
+            });
+
+            modalEl.addEventListener('hidden.bs.modal', function () {
+                if (triggerEl && typeof triggerEl.focus === 'function') {
+                    setTimeout(function () { triggerEl.focus(); }, 50);
+                }
+                triggerEl = null;
+            });
+        });
+    </script>
 </body>
 
 </html>
