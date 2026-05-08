@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initContactForm();
     initScrollAnimations();
     initProjectRequestModal();
+    initPrezziPage();
+    initModalFocusManagement();
 });
 
 // Navbar functionality
@@ -490,13 +492,357 @@ function initBackToTop() {
     });
 }
 
+// ── Pagina Prezzi: modale preventivo, addon, gateway, sticky bar ──
+function initPrezziPage() {
+    if (!document.getElementById('quoteRequestModal')) return; // non siamo in prezzi.html
+
+    const modal = new bootstrap.Modal(document.getElementById('quoteRequestModal'));
+    const selectedAddons = new Map(); // name → { price, priceNum, iconCls }
+    let lastPlanData = null;
+
+    // ── Leggo le addon-card una volta sola ─────────────────────────
+    const allAddons = [];
+    document.querySelectorAll('.addon-card').forEach(card => {
+        const btn      = card.querySelector('.btn-addon');
+        const name     = card.querySelector('h5').textContent.trim();
+        const priceEl  = card.querySelector('.addon-card__price');
+        const iconEl   = card.querySelector('.addon-card__icon i');
+        const priceNum = priceEl ? parseInt(priceEl.textContent.replace(/[^0-9]/g, '')) || 0 : 0;
+        const priceStr = priceEl ? priceEl.textContent.trim() : '';
+        const iconCls  = iconEl  ? [...iconEl.classList].find(c => c.startsWith('bi-')) || '' : '';
+        allAddons.push({ name, priceNum, priceStr, iconCls, card, btn });
+    });
+
+    // ── Sincronizza stato visivo card esterna ───────────────────────
+    function syncCardState(name, selected) {
+        const entry = allAddons.find(a => a.name === name);
+        if (!entry) return;
+        entry.card.classList.toggle('addon-card--selected', selected);
+        entry.btn.classList.toggle('btn-addon--selected', selected);
+        entry.btn.innerHTML = selected
+            ? '<i class="bi bi-check2 me-1"></i>Selezionato'
+            : 'Aggiungi';
+    }
+
+    // ── Gateway modale ───────────────────────────────────────────────
+    const gatewayModal = new bootstrap.Modal(document.getElementById('addonGatewayModal'));
+    let pendingAddon   = null;
+
+    document.getElementById('agw-yes-btn').addEventListener('click', function () {
+        document.getElementById('agw-choice-panel').style.display = 'none';
+        document.getElementById('agw-yes-panel').style.display    = 'block';
+        document.getElementById('agw-project-name').focus();
+    });
+
+    document.getElementById('agw-back-btn').addEventListener('click', function () {
+        document.getElementById('agw-yes-panel').style.display    = 'none';
+        document.getElementById('agw-choice-panel').style.display = 'block';
+    });
+
+    document.getElementById('agw-no-btn').addEventListener('click', function () {
+        gatewayModal.hide();
+        document.getElementById('pricing-plans').scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            document.querySelectorAll('.pricing-card').forEach(c => {
+                c.classList.add('pricing-card--pulse');
+                setTimeout(() => c.classList.remove('pricing-card--pulse'), 2600);
+            });
+        }, 600);
+    });
+
+    document.getElementById('agw-confirm-btn').addEventListener('click', function () {
+        const projectName = document.getElementById('agw-project-name').value.trim();
+        if (!projectName) {
+            document.getElementById('agw-project-name').focus();
+            return;
+        }
+        if (pendingAddon) {
+            selectedAddons.set(pendingAddon.name, {
+                price: pendingAddon.priceStr,
+                priceNum: pendingAddon.priceNum,
+                iconCls: pendingAddon.iconCls
+            });
+            syncCardState(pendingAddon.name, true);
+            updateStickyBar();
+        }
+        gatewayModal.hide();
+        openModal(null, projectName);
+    });
+
+    // ── Combobox pacchetti nel gateway ───────────────────────────────
+    const PLANS = [
+        { label: 'One-page',            icon: 'bi-file-earmark' },
+        { label: 'Base Multipagina',    icon: 'bi-files' },
+        { label: 'Pro Multipagina',     icon: 'bi-layers' },
+        { label: 'Premium Multipagina', icon: 'bi-stars' },
+    ];
+
+    const comboInput = document.getElementById('agw-project-name');
+    const comboList  = document.getElementById('agw-combo-list');
+    let comboOpen    = false;
+    let activeIdx    = -1;
+
+    function renderCombo(filter) {
+        const q = (filter || '').toLowerCase();
+        const results = PLANS.filter(p => p.label.toLowerCase().includes(q));
+        comboList.innerHTML = results.length
+            ? results.map((p) => `
+                <li class="agw-combo__item" role="option" data-label="${p.label}" tabindex="-1" aria-selected="false">
+                    <i class="bi ${p.icon}" aria-hidden="true"></i>
+                    <span>${highlight(p.label, q)}</span>
+                </li>`).join('')
+            : `<li class="agw-combo__item agw-combo__item--empty" role="option" aria-disabled="true">
+                    <i class="bi bi-slash-circle" aria-hidden="true"></i><span>Nessun pacchetto trovato</span>
+               </li>`;
+        comboList.querySelectorAll('.agw-combo__item:not(.agw-combo__item--empty)').forEach(li => {
+            li.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+                selectPlan(this.dataset.label);
+            });
+        });
+        activeIdx = -1;
+    }
+
+    function highlight(text, q) {
+        if (!q) return text;
+        return text.replace(new RegExp(`(${q})`, 'gi'), '<mark>$1</mark>');
+    }
+
+    function selectPlan(label) {
+        comboInput.value = label;
+        closeCombo();
+        comboInput.focus();
+    }
+
+    function openCombo() {
+        renderCombo(comboInput.value);
+        comboList.classList.add('agw-combo__list--open');
+        comboInput.setAttribute('aria-expanded', 'true');
+        comboOpen = true;
+    }
+
+    function closeCombo() {
+        comboList.classList.remove('agw-combo__list--open');
+        comboInput.setAttribute('aria-expanded', 'false');
+        comboOpen = false;
+        activeIdx = -1;
+    }
+
+    comboInput.addEventListener('focus', () => openCombo());
+    comboInput.addEventListener('input', () => {
+        if (!comboOpen) openCombo();
+        else renderCombo(comboInput.value);
+    });
+    comboInput.addEventListener('blur', () => setTimeout(closeCombo, 150));
+    comboInput.addEventListener('keydown', function (e) {
+        const items = [...comboList.querySelectorAll('.agw-combo__item:not(.agw-combo__item--empty)')];
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeIdx = Math.min(activeIdx + 1, items.length - 1);
+            items.forEach((el, i) => el.classList.toggle('agw-combo__item--active', i === activeIdx));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeIdx = Math.max(activeIdx - 1, 0);
+            items.forEach((el, i) => el.classList.toggle('agw-combo__item--active', i === activeIdx));
+        } else if (e.key === 'Enter' && activeIdx >= 0) {
+            e.preventDefault();
+            selectPlan(items[activeIdx].dataset.label);
+        } else if (e.key === 'Escape') {
+            closeCombo();
+        }
+    });
+
+    // Reset combobox alla chiusura del gateway
+    document.getElementById('addonGatewayModal').addEventListener('hidden.bs.modal', function () {
+        document.getElementById('agw-yes-panel').style.display    = 'none';
+        document.getElementById('agw-choice-panel').style.display = 'block';
+        document.getElementById('agw-project-name').value         = '';
+        pendingAddon = null;
+    });
+
+    // ── Toggle addon dalle card esterne ─────────────────────────────
+    allAddons.forEach(({ name, priceNum, priceStr, iconCls, btn }) => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const wasSelected = selectedAddons.has(name);
+            if (wasSelected) {
+                selectedAddons.delete(name);
+                syncCardState(name, false);
+                updateStickyBar();
+                if (document.getElementById('quoteRequestModal').classList.contains('show')) {
+                    refreshInlineAddons();
+                    refreshAddonSummary();
+                }
+                return;
+            }
+            if (document.getElementById('quoteRequestModal').classList.contains('show')) {
+                selectedAddons.set(name, { price: priceStr, priceNum, iconCls });
+                syncCardState(name, true);
+                updateStickyBar();
+                refreshInlineAddons();
+                refreshAddonSummary();
+                return;
+            }
+            pendingAddon = { name, priceNum, priceStr, iconCls };
+            document.getElementById('agw-addon-name').textContent = '"' + name + '"';
+            const gatewayModalEl = document.getElementById('addonGatewayModal');
+            gatewayModalEl._triggerElement = btn;
+            gatewayModal.show();
+        });
+    });
+
+    // ── Sticky bar ──────────────────────────────────────────────────
+    const stickyBar   = document.getElementById('addon-sticky-bar');
+    const stickyCount = document.getElementById('addon-sticky-count');
+    const stickyTotal = document.getElementById('addon-sticky-total');
+
+    function updateStickyBar() {
+        const count = selectedAddons.size;
+        stickyBar.classList.toggle('is-visible', count > 0);
+        if (count > 0) {
+            stickyCount.textContent = count;
+            const total = [...selectedAddons.values()].reduce((s, a) => s + a.priceNum, 0);
+            stickyTotal.textContent = '+€' + total + ' di servizi aggiuntivi';
+        }
+    }
+
+    document.getElementById('addon-sticky-btn').addEventListener('click', function () {
+        document.getElementById('quoteRequestModal')._triggerElement = this;
+        openModal(lastPlanData);
+    });
+
+    // ── Chip inline dentro la modale ────────────────────────────────
+    function refreshInlineAddons() {
+        const container = document.getElementById('qrm-inline-addon-list');
+        container.innerHTML = allAddons.map(a => {
+            const sel = selectedAddons.has(a.name);
+            return `
+                <div class="qrm-inline-addon-item${sel ? ' qrm-inline-addon-item--selected' : ''}" data-name="${a.name}">
+                    <div class="qrm-inline-addon-info">
+                        <i class="bi ${a.iconCls}" aria-hidden="true"></i>
+                        <span>${a.name}</span>
+                    </div>
+                    <div class="qrm-inline-addon-right">
+                        <span class="qrm-inline-addon-price">${a.priceStr}</span>
+                        <button type="button" class="qrm-inline-addon-btn${sel ? ' qrm-inline-addon-btn--sel' : ''}" aria-pressed="${sel}">
+                            ${sel ? '<i class="bi bi-check2"></i>' : '<i class="bi bi-plus-lg"></i>'}
+                        </button>
+                    </div>
+                </div>`;
+        }).join('');
+        container.querySelectorAll('.qrm-inline-addon-item').forEach(item => {
+            item.querySelector('.qrm-inline-addon-btn').addEventListener('click', function () {
+                const name = item.dataset.name;
+                const addonData = allAddons.find(a => a.name === name);
+                if (selectedAddons.has(name)) {
+                    selectedAddons.delete(name);
+                    syncCardState(name, false);
+                } else {
+                    selectedAddons.set(name, { price: addonData.priceStr, priceNum: addonData.priceNum, iconCls: addonData.iconCls });
+                    syncCardState(name, true);
+                }
+                updateStickyBar();
+                refreshInlineAddons();
+                refreshAddonSummary();
+            });
+        });
+    }
+
+    // ── Riepilogo addon ─────────────────────────────────────────────
+    function refreshAddonSummary() {
+        const wrap = document.getElementById('qrm-addons');
+        if (selectedAddons.size > 0) {
+            const total = [...selectedAddons.values()].reduce((s, a) => s + a.priceNum, 0);
+            document.getElementById('qrm-addons-list').innerHTML =
+                [...selectedAddons.entries()].map(([n, a]) =>
+                    `<div class="qrm-addon-item"><span><i class="bi bi-plus-circle me-1"></i>${n}</span><span>${a.price}</span></div>`
+                ).join('');
+            document.getElementById('qrm-addons-total').innerHTML =
+                `<span>Totale aggiuntivi</span><span>+€${total}</span>`;
+            wrap.style.display = 'block';
+        } else {
+            wrap.style.display = 'none';
+        }
+    }
+
+    // ── Apertura modale ─────────────────────────────────────────────
+    let addonOnlyProject = '';
+
+    function openModal(data, projectContext) {
+        lastPlanData = data;
+        addonOnlyProject = projectContext || '';
+        const addonOnly = !data;
+        document.getElementById('qrm-icon').className = 'bi ' + (addonOnly ? 'bi-plus-square' : data.icon);
+        document.getElementById('qrm-badge').textContent = addonOnly ? 'Servizi extra' : 'Preventivo gratuito';
+        document.getElementById('qrm-title-text').textContent = addonOnly ? 'Aggiungi servizi extra' : 'Hai scelto il pacchetto';
+        document.getElementById('qrm-plan-name').textContent = addonOnly
+            ? (addonOnlyProject ? 'Progetto: ' + addonOnlyProject : '')
+            : data.plan;
+        document.getElementById('qrm-desc').textContent = addonOnly
+            ? (addonOnlyProject
+                ? 'Aggiungo i servizi selezionati al tuo progetto "' + addonOnlyProject + '" e ti preparo un preventivo personalizzato.'
+                : 'Hai già un sito o un pacchetto? Scegli i servizi extra e ti contatto per un preventivo.')
+            : 'Ottima scelta! Puoi aggiungere servizi extra qui sotto, poi ti rispondo entro 24h.';
+        const summaryEl = document.getElementById('qrm-summary');
+        if (!addonOnly) {
+            document.getElementById('qrm-price').textContent    = data.price + ' una tantum';
+            document.getElementById('qrm-delivery').textContent = data.delivery;
+            summaryEl.style.display = '';
+        } else {
+            summaryEl.style.display = 'none';
+        }
+        refreshInlineAddons();
+        refreshAddonSummary();
+        // _triggerElement può essere già impostato dal chiamante; non sovrascrivere
+        modal.show();
+    }
+
+    // ── Parliamone ──────────────────────────────────────────────────
+    document.getElementById('qrm-go-contact').addEventListener('click', function (e) {
+        e.preventDefault();
+        let subject;
+        if (lastPlanData) {
+            subject = 'Preventivo pacchetto: ' + lastPlanData.plan;
+            if (selectedAddons.size > 0)
+                subject += ' + ' + [...selectedAddons.keys()].join(', ');
+        } else if (selectedAddons.size > 0) {
+            subject = addonOnlyProject
+                ? 'Servizi extra per "' + addonOnlyProject + '": ' + [...selectedAddons.keys()].join(', ')
+                : 'Servizi extra: ' + [...selectedAddons.keys()].join(', ');
+        } else {
+            subject = 'Richiesta informazioni';
+        }
+        sessionStorage.setItem('quoteSubject', subject);
+        window.location.href = 'home.html#contact';
+    });
+
+    // ── Bottoni "Richiedi Preventivo" sulle card piano ──────────────
+    document.querySelectorAll('.btn-request-quote').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('quoteRequestModal')._triggerElement = this;
+            openModal({
+                plan:     this.dataset.plan,
+                price:    this.dataset.price,
+                icon:     this.dataset.icon,
+                delivery: this.dataset.delivery
+            });
+        });
+    });
+}
+
 // Project Request Modal
 function initProjectRequestModal() {
+    if (!document.getElementById('projectRequestModal')) return;
+
     const modal = new bootstrap.Modal(document.getElementById('projectRequestModal'));
+    const modalEl = document.getElementById('projectRequestModal');
 
     document.querySelectorAll('.btn-request-project').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
+
+            modalEl._triggerElement = this;
 
             const project = this.dataset.project;
             const stack = this.dataset.stack;
@@ -523,7 +869,6 @@ function initProjectRequestModal() {
                 }
                 modal.hide();
                 // Aspetta che la modale sia chiusa prima di scrollare
-                const modalEl = document.getElementById('projectRequestModal');
                 modalEl.addEventListener('hidden.bs.modal', function scrollOnClose() {
                     const contactSection = document.getElementById('contact');
                     if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -532,6 +877,44 @@ function initProjectRequestModal() {
             }, { once: true });
 
             modal.show();
+        });
+    });
+}
+
+// ── Gestione focus modale: focus sulla × all'apertura, ritorno al trigger alla chiusura ──
+function initModalFocusManagement() {
+    // _triggerElement viene impostato PRIMA di ogni modal.show() nel codice chiamante.
+    // Il fallback è document.activeElement al momento dell'evento show.bs.modal.
+
+    document.querySelectorAll('.modal').forEach(modalEl => {
+
+        modalEl.addEventListener('show.bs.modal', function () {
+            // Usa il trigger impostato esternamente; se manca, usa l'elemento attivo ora
+            if (!modalEl._triggerElement) {
+                modalEl._triggerElement = document.activeElement;
+            }
+        });
+
+        // Focus sulla X (o primo elemento) all'apertura, dopo il focus-trap di Bootstrap
+        modalEl.addEventListener('shown.bs.modal', function () {
+            setTimeout(() => {
+                const closeBtn = modalEl.querySelector('.btn-close, .project-request-close');
+                if (closeBtn) { closeBtn.focus(); return; }
+                const first = modalEl.querySelector(
+                    'button:not([disabled]), [href], input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                );
+                if (first) first.focus();
+            }, 150);
+        });
+
+        // Alla chiusura (X, ESC, "Forse più tardi") ripristina focus sul trigger
+        modalEl.addEventListener('hidden.bs.modal', function () {
+            if (document.querySelector('.modal.show')) return; // altra modale ancora aperta
+            const trigger = modalEl._triggerElement;
+            modalEl._triggerElement = null;
+            if (trigger && document.body.contains(trigger)) {
+                setTimeout(() => { try { trigger.focus(); } catch (e) {} }, 150);
+            }
         });
     });
 }
