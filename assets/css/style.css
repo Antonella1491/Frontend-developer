@@ -189,7 +189,7 @@ select:focus {
 }
 
 .navbar-toggler:focus {
-  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 0 0.25rem #5b6ee1;
 }
 
 /* Hero Section */
@@ -864,7 +864,7 @@ select:focus {
   border-color: #667eea;
   color: #ffffff;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.35);
-  outline: 3px solid #5b6ee1;
+  outline: 3px solid #fff;
 }
 
 .contact-form .btn {
@@ -1244,6 +1244,17 @@ footer .social-links .social-link:hover i {
   border: none;
   box-shadow: 0 4px 16px rgba(102, 126, 234, 0.08);
   transition: background 0.2s, color 0.2s;
+  min-height: 64px;
+  align-items: center;
+  white-space: normal;
+  word-break: break-word;
+}
+
+@media (max-width: 767px) {
+  .accordion-button {
+    height: 72px;
+    font-size: 0.875rem;
+  }
 }
 
 .accordion-button:not(.collapsed) {
@@ -1254,9 +1265,8 @@ footer .social-links .social-link:hover i {
 }
 
 .accordion-button:focus-visible {
-  outline: 2px solid #ffffff;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.4);
+  outline: 3px solid #fff !important;
+  outline-offset: -4px;
 }
 
 .accordion-button:hover {
