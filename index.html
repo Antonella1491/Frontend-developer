@@ -6,700 +6,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antonella Pirozzi | Frontend Developer</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        (function () { emailjs.init({ publicKey: 'KfeKbfvg84r-kG6o0' }); })();
-        // Pre-compila oggetto se arrivato da prezzi.html
-        document.addEventListener('DOMContentLoaded', function () {
-            const subject = sessionStorage.getItem('quoteSubject');
-            if (subject) {
-                const el = document.getElementById('contact-subject');
-                if (el) el.value = subject;
-                sessionStorage.removeItem('quoteSubject');
-            }
-        });
-    </script>
-
-    <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/splash.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Skip link per accessibilità -->
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" role="navigation" aria-label="Navigazione principale">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#home" aria-label="Frontend Developer - Vai alla homepage">
-                <i class="bi bi-code-slash text-primary me-2" aria-hidden="true"></i>
-                Frontend Developer
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Apri menu di navigazione">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home" aria-label="Vai alla sezione Home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about" aria-label="Vai alla sezione Chi Sono">Chi Sono</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills" aria-label="Vai alla sezione Competenze">Competenze</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#portfolio" aria-label="Vai alla sezione Portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="prezzi.html" aria-label="Vai alla pagina Prezzi">Prezzi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact" aria-label="Vai alla sezione Contatti">Contatti</a>
-                    </li>
-                </ul>
-            </div>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <div class="splash" role="main">
+
+        <div class="logo-ring" aria-hidden="true">
+            <svg class="logo-ring__svg" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="90" cy="90" r="86" stroke="url(#ringGrad)" stroke-width="2" stroke-dasharray="12 6" stroke-linecap="round"/>
+                <defs>
+                    <linearGradient id="ringGrad" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#667eea"/>
+                        <stop offset="100%" stop-color="#764ba2" stop-opacity="0.3"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <img src="assets/images/logo.png" alt="Logo Antonella Pirozzi" class="logo-ring__img">
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <main id="main-content">
-        <section id="home" class="hero-section">
-            <div class="container">
-                <div class="row align-items-center min-vh-100">
-                    <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start">
-                        <div class="hero-content">
-                            <h1 class="hero-title">
-                                Ciao, sono Antonella, un
-                                <span class="text-primary typed-text"></span>
-                            </h1>
-                            <p class="hero-description lead">
-                                Progetto e sviluppo interfacce web moderne, responsive e accessibili, con un approccio
-                                concreto e orientato all’utente.
+        <p class="splash-label">Frontend Developer</p>
 
-                            </p>
-                            <span class="hero-badge">
-                                <i class="bi bi-stars me-2" aria-hidden="true"></i>
-                                Disponibile per nuovi progetti
-                            </span>
-                            <div class="hero-tech-stack" aria-label="Tecnologie principali">
-                                <span class="hero-chip">HTML5</span>
-                                <span class="hero-chip">CSS3</span>
-                                <span class="hero-chip">JavaScript</span>
-                                <span class="hero-chip">TypeScript</span>
-                                <span class="hero-chip">Angular</span>
-                            </div>
-                            <div class="hero-metrics" aria-label="Risultati principali">
-                                <div class="hero-metric">
-                                    <strong>50+</strong>
-                                    <span>Progetti completati</span>
-                                </div>
-                                <div class="hero-metric">
-                                    <strong>4+ anni</strong>
-                                    <span>Esperienza frontend</span>
-                                </div>
-                                <div class="hero-metric">
-                                    <strong>WCAG</strong>
-                                    <span>Accessibilità by design</span>
-                                </div>
-                            </div>
-                            <div class="hero-buttons">
-                                <a href="#portfolio" class="btn btn-hero-primary btn-lg me-3">I Miei Progetti</a>
-                                <a href="#contact" class="btn btn-hero-ghost btn-lg">Contattami</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 order-1 order-lg-2">
-                        <div class="hero-image hero-image--top">
-                            <img src="assets/images/logo.png" alt="Illustrazione sviluppo web e programmazione"
-                                class="coding-image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <h1 class="splash-name"><em>Antonella Pirozzi</em></h1>
 
-        <!-- About Section -->
-        <section id="about" class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center mb-5">
-                        <h2 class="section-title">Chi Sono</h2>
-                        <div class="section-divider"></div>
-                    </div>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="about-image">
-                            <img src="assets/images/profile-photo.jpeg" alt="Antonella - Frontend Developer"
-                                class="about-profile-image">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="about-content">
-                            <h3 class="mb-4">Frontend Developer</h3>
-                            <p class="mb-4">
+        <p class="splash-role">HTML &middot; CSS &middot; JavaScript &middot; Angular &middot; TypeScript</p>
 
+        <a href="home.html" class="splash-btn" aria-label="Entra nel portfolio">
+            Entra nel sito
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
 
-                                Sviluppo interfacce web moderne, responsive e accessibili, con particolare attenzione
-                                all’esperienza utente e alla qualità del codice.
-
-                                Lavoro con HTML, CSS, Bootstrap, JavaScript, TypeScript e Angular, costruendo
-                                applicazioni chiare, performanti e facili da usare.
-
-                                Seguo le linee guida WCAG per garantire accessibilità e inclusività, perché un buon
-                                prodotto deve essere utilizzabile da tutti.
-                            </p>
-                            <div class="row mb-4">
-                                <div class="col-sm-6">
-                                    <div class="about-item">
-                                        <i class="bi bi-calendar-check text-primary"></i>
-                                        <div>
-                                            <h6>Esperienza</h6>
-                                            <p>4+ anni nel settore</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="about-item">
-                                        <i class="bi bi-award text-primary"></i>
-                                        <div>
-                                            <h6>Progetti</h6>
-                                            <p>50+ progetti completati</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#contact" class="btn btn-primary btn-gradient">Iniziamo a collaborare</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-5 bg-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center mb-lg-5 mb-2">
-                        <h2 class="section-title">Le Mie Competenze</h2>
-                        <div class="section-divider"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza HTML5">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-filetype-html"></i>
-                            </div>
-                            <h5>HTML5</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="95" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="HTML5 competenza al 95%">
-                                <div class="progress-bar" data-width="95" style="width: 95%;">95%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza HTML5: 95 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza CSS">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-filetype-css"></i>
-                            </div>
-                            <h5>CSS3</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="92" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="CSS competenza al 92%">
-                                <div class="progress-bar" data-width="92" style="width: 92%;">92%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza CSS: 92 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza JavaScript">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-filetype-js"></i>
-                            </div>
-                            <h5>JavaScript</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="88" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="JavaScript competenza all'88%">
-                                <div class="progress-bar" data-width="88" style="width: 88%;">88%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza JavaScript: 88 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza Bootstrap">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-bootstrap"></i>
-                            </div>
-                            <h5>Bootstrap</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="92" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="Bootstrap competenza al 92%">
-                                <div class="progress-bar" data-width="92" style="width: 92%;">92%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza Bootstrap: 92 su 100</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza SCSS">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-filetype-scss"></i>
-                            </div>
-                            <h5>SCSS</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="SCSS competenza all'85%">
-                                <div class="progress-bar" data-width="85" style="width: 85%;">85%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza SCSS: 85 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza Angular">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-code-square"></i>
-                            </div>
-                            <h5>Angular</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="78" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="Angular competenza al 78%">
-                                <div class="progress-bar" data-width="78" style="width: 78%;">78%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza Angular: 78 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza TypeScript">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-braces"></i>
-                            </div>
-                            <h5>TypeScript</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="82" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="TypeScript competenza all'82%">
-                                <div class="progress-bar" data-width="82" style="width: 82%;">82%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza TypeScript: 82 su 100</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="skill-card" role="article" aria-label="Competenza Accessibilità">
-                            <div class="skill-icon" aria-hidden="true">
-                                <i class="bi bi-universal-access-circle"></i>
-                            </div>
-                            <h5>Accessibilità</h5>
-                            <div class="progress mb-2" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                                aria-valuemax="100" aria-label="Accessibilità competenza al 90%">
-                                <div class="progress-bar" data-width="90" style="width: 90%;">90%</div>
-                            </div>
-                            <span class="sr-only">Livello di competenza Accessibilità: 90 su 100</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center mb-5">
-                        <h2 class="section-title">Il Mio Portfolio</h2>
-                        <div class="section-divider"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto E-commerce Website">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto E-commerce Website">
-                                    <i class="bi bi-laptop" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="E-commerce Website"
-                                            data-stack="HTML, CSS, JavaScript, Bootstrap"
-                                            data-icon="bi-laptop">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>E-commerce Website</h5>
-                                <p class="text-muted">HTML, CSS, JavaScript, Bootstrap</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto Mobile App Landing">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto Mobile App Landing">
-                                    <i class="bi bi-phone" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Mobile App Landing"
-                                            data-stack="Angular, SCSS, Bootstrap"
-                                            data-icon="bi-phone">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>Mobile App Landing</h5>
-                                <p class="text-muted">Angular, SCSS, Bootstrap</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto Corporate Website">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto Corporate Website">
-                                    <i class="bi bi-globe" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Corporate Website"
-                                            data-stack="HTML5, CSS3, JavaScript"
-                                            data-icon="bi-globe">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>Corporate Website</h5>
-                                <p class="text-muted">HTML5, CSS3, JavaScript</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto Creative Portfolio">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto Creative Portfolio">
-                                    <i class="bi bi-brush" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Creative Portfolio"
-                                            data-stack="Vue.js, SCSS, Animation"
-                                            data-icon="bi-brush">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>Creative Portfolio</h5>
-                                <p class="text-muted">Vue.js, SCSS, Animation</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto Dashboard Analytics">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto Dashboard Analytics">
-                                    <i class="bi bi-graph-up" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Dashboard Analytics"
-                                            data-stack="Angular, Chart.js, Bootstrap"
-                                            data-icon="bi-graph-up">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>Dashboard Analytics</h5>
-                                <p class="text-muted">Angular, Chart.js, Bootstrap</p>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <article class="portfolio-item" aria-label="Progetto Blog Platform">
-                            <div class="portfolio-image">
-                                <div class="placeholder-project" role="img"
-                                    aria-label="Anteprima progetto Blog Platform">
-                                    <i class="bi bi-journal-text" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Blog Platform"
-                                            data-stack="JavaScript, CSS Grid, API"
-                                            data-icon="bi-journal-text">Richiedi questo progetto</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-info">
-                                <h5>Blog Platform</h5>
-                                <p class="text-muted">JavaScript, CSS Grid, API</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-5 bg-dark text-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center mb-lg-5">
-                        <h2 class="section-title text-light">Contattami</h2>
-                        <div class="section-divider"></div>
-                    </div>
-                </div>
-                <div class="row contact-equal">
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div class="contact-info mb-lg-0 mb-3">
-                            <h4 class="mb-4">Iniziamo un progetto insieme!</h4>
-                            <p class="mb-4">
-                                Hai un'idea per un progetto web? Collaboriamo per trasformarla in realtà!
-                                Contattami per discutere le tue esigenze.
-                            </p>
-                            <div class="contact-item">
-                                <i class="bi bi-envelope text-primary"></i>
-                                <div>
-                                    <h6>Email</h6>
-                                    <p><a href="mailto:antonellapirozzi1491@libero.it" class="contact-link">antonellapirozzi1491@libero.it</a></p>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="bi bi-phone text-primary"></i>
-                                <div>
-                                    <h6>Telefono</h6>
-                                    <p><a href="tel:+393405560275" class="contact-link">+39 340 556 0275</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form class="contact-form" role="form" aria-label="Modulo di contatto" id="contact-form">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="contact-name" class="sr-only">Il tuo nome</label>
-                                    <input type="text" id="contact-name" name="name" class="form-control"
-                                        placeholder="Il tuo nome" required aria-describedby="name-help">
-                                    <div id="name-help" class="sr-only">Inserisci il tuo nome completo</div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="contact-email" class="sr-only">La tua email</label>
-                                    <input type="email" id="contact-email" name="email" class="form-control"
-                                        placeholder="La tua email" required aria-describedby="email-help">
-                                    <div id="email-help" class="sr-only">Inserisci un indirizzo email valido</div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="contact-phone" class="sr-only">Il tuo numero di telefono</label>
-                                    <input type="tel" id="contact-phone" name="phone" class="form-control"
-                                        placeholder="Numero di telefono" required aria-describedby="phone-error">
-                                    <div id="phone-error" class="form-field-error" role="alert" aria-live="polite"
-                                        style="display:none;">
-                                        <i class="bi bi-exclamation-circle me-1"></i>Inserisci un numero valido (es. +39
-                                        333 1234567)
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="contact-subject" class="sr-only">Oggetto</label>
-                                    <input type="text" id="contact-subject" name="subject" class="form-control"
-                                        placeholder="Oggetto" required aria-describedby="subject-help">
-                                    <div id="subject-help" class="sr-only">Inserisci l'oggetto del messaggio</div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact-message" class="sr-only">Il tuo messaggio</label>
-                                <textarea id="contact-message" name="message" class="form-control" rows="5"
-                                    placeholder="Il tuo messaggio" required aria-describedby="message-help"></textarea>
-                                <div id="message-help" class="sr-only">Scrivi il tuo messaggio dettagliato</div>
-                            </div>
-
-                            <!-- Form status messages -->
-                            <div id="form-status" class="mb-3" style="display: none;">
-                                <div id="success-message" class="alert alert-success" style="display: none;">
-                                    <i class="bi bi-check-circle me-2"></i>
-                                    Messaggio inviato con successo! Ti risponderò entro 24 ore.
-                                </div>
-                                <div id="error-message" class="alert alert-danger" style="display: none;">
-                                    <i class="bi bi-exclamation-triangle me-2"></i>
-                                    Si è verificato un errore. Contattami direttamente via <a
-                                        href="https://wa.me/+393405560275" class="alert-link" target="_blank"
-                                        rel="noopener noreferrer">WhatsApp</a>.
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg" aria-describedby="submit-help"
-                                id="submit-btn" disabled>
-                                <i class="bi bi-send me-2" aria-hidden="true"></i>
-                                <span id="btn-text">Invia Messaggio</span>
-                                <span id="btn-loading" style="display: none;">
-                                    <i class="bi bi-hourglass-split me-2" aria-hidden="true"></i>
-                                    Preparazione...
-                                </span>
-                            </button>
-                            <div id="submit-help" class="sr-only">Clicca per inviare il messaggio</div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Modale di Conferma -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-modal="true"
-        role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content confirm-modal-content">
-                <div class="modal-header border-0 pb-0">
-                    <div class="confirm-modal-icon">
-                        <i class="bi bi-send-check" aria-hidden="true"></i>
-                    </div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Chiudi"></button>
-                </div>
-                <div class="modal-body pt-2">
-                    <h5 class="modal-title fw-bold mb-1" id="confirmModalLabel">Conferma invio messaggio</h5>
-                    <p class="modal-subtitle mb-4">Controlla i dati prima di inviare</p>
-                    <ul class="confirm-recap-list" id="confirm-recap-list">
-                        <!-- filled by JS -->
-                    </ul>
-                </div>
-                <div class="modal-footer border-0 pt-0 gap-2">
-                    <button type="button" class="btn btn-modal-cancel" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Annulla
-                    </button>
-                    <button type="button" class="btn btn-modal-confirm" id="confirm-send-btn">
-                        <i class="bi bi-send me-1" aria-hidden="true"></i>Conferma e Invia
-                    </button>
-                </div>
-            </div>
-        </div>
+        <p class="splash-footer">&#169; 2026 Antonella Pirozzi</p>
     </div>
 
-    <!-- Modale di Recap -->
-    <div class="modal fade" id="recapModal" tabindex="-1" aria-labelledby="recapModalLabel" aria-modal="true"
-        role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content recap-modal-content">
-                <div class="modal-header border-0 pb-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Chiudi"></button>
-                </div>
-                <div class="modal-body text-center px-4 pb-4">
-                    <div class="recap-success-icon" aria-hidden="true">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-                    <h4 class="fw-bold mt-3 mb-1" id="recapModalLabel">Messaggio inviato!</h4>
-                    <p class="recap-subtitle mb-4">Il tuo messaggio è stato inviato direttamente. Ecco il riepilogo
-                        completo.</p>
-                    <div class="recap-card" id="recap-card">
-                        <!-- filled by JS -->
-                    </div>
-                    <p class="recap-note mt-3">
-                        <i class="bi bi-info-circle me-1" aria-hidden="true"></i>
-                        Rispondo generalmente entro <strong>24 ore lavorative</strong>.
-                    </p>
-                </div>
-                <div class="modal-footer border-0 pt-0 justify-content-center gap-3">
-                    <button type="button" class="btn btn-modal-confirm" data-bs-dismiss="modal">
-                        <i class="bi bi-house me-1" aria-hidden="true"></i>Torna alla Home
-                    </button>
-                    <a href="prezzi.html" class="btn btn-modal-cancel">
-                        <i class="bi bi-tag me-1" aria-hidden="true"></i>Vedi i Prezzi
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, dots;
+        const COLORS = ['#667eea','#764ba2','#a78bfa','#818cf8'];
 
-    <!-- Modal Richiesta Progetto -->
-    <div class="modal fade" id="projectRequestModal" tabindex="-1" aria-labelledby="projectRequestModalLabel"
-        aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content project-request-modal">
-                <button type="button" class="btn-close btn-close-white project-request-close"
-                    data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        function resize() {
+            W = canvas.width  = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        function isMobile() { return window.innerWidth < 600; }
+        function createDots(n) {
+            return Array.from({ length: n }, () => ({
+                x: Math.random() * W, y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                r: Math.random() * 2 + 1,
+                color: COLORS[Math.floor(Math.random() * COLORS.length)],
+                alpha: Math.random() * 0.5 + 0.2,
+            }));
+        }
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            const bg = ctx.createRadialGradient(W*.3, H*.3, 0, W*.3, H*.3, W*.9);
+            bg.addColorStop(0, 'rgba(28,18,72,0.98)');
+            bg.addColorStop(1, 'rgba(8,6,26,1)');
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, W, H);
 
-                <!-- Header con icona e particelle -->
-                <div class="prm-header">
-                    <div class="prm-particles" aria-hidden="true">
-                        <span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="prm-icon-wrap">
-                        <i class="bi prm-project-icon" id="prm-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="prm-badge">Nuovo Progetto</div>
-                </div>
+            const MAX = 130;
+            dots.forEach((d, i) => {
+                d.x += d.vx; d.y += d.vy;
+                if (d.x < 0 || d.x > W) d.vx *= -1;
+                if (d.y < 0 || d.y > H) d.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(d.x, d.y, d.r, 0, Math.PI*2);
+                ctx.fillStyle = d.color;
+                ctx.globalAlpha = d.alpha;
+                ctx.fill();
+                for (let j = i+1; j < dots.length; j++) {
+                    const o = dots[j];
+                    const dx = d.x-o.x, dy = d.y-o.y;
+                    const dist = Math.sqrt(dx*dx+dy*dy);
+                    if (dist < MAX) {
+                        ctx.beginPath();
+                        ctx.moveTo(d.x, d.y);
+                        ctx.lineTo(o.x, o.y);
+                        ctx.strokeStyle = '#667eea';
+                        ctx.globalAlpha = (1 - dist/MAX) * 0.12;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            });
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', () => { resize(); dots = createDots(isMobile() ? 40 : 70); });
+        resize();
+        dots = createDots(isMobile() ? 40 : 70);
+        draw();
+    </script>
 
-                <!-- Body -->
-                <div class="prm-body">
-                    <h4 class="prm-title" id="projectRequestModalLabel">
-                        Vuoi un progetto simile a<br>
-                        <span class="prm-project-name" id="prm-project-name"></span>?
-                    </h4>
-                    <p class="prm-desc">Parliamoci! Dimmi cosa hai in mente e costruiamo insieme la tua idea.</p>
-
-                    <div class="prm-stack-wrap">
-                        <span class="prm-stack-label">Tecnologie utilizzate</span>
-                        <div class="prm-stack-chips" id="prm-stack-chips"></div>
-                    </div>
-
-                    <div class="prm-steps">
-                        <div class="prm-step">
-                            <div class="prm-step-num">1</div>
-                            <span>Scrivi il tuo messaggio nel form contatti</span>
-                        </div>
-                        <div class="prm-step">
-                            <div class="prm-step-num">2</div>
-                            <span>Ricevi una risposta entro 24h</span>
-                        </div>
-                        <div class="prm-step">
-                            <div class="prm-step-num">3</div>
-                            <span>Definiamo insieme obiettivi e preventivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="prm-footer">
-                    <button type="button" class="btn prm-btn-cancel" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Forse più tardi
-                    </button>
-                    <a href="#contact" class="btn prm-btn-confirm" id="prm-go-contact">
-                        <i class="bi bi-send me-1" aria-hidden="true"></i>Parliamone!
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4" role="contentinfo" aria-label="Informazioni del sito">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0 footer-copy">&copy; 2026 Frontend Developer. Tutti i diritti riservati.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
 </body>
-
 </html>
