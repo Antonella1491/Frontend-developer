@@ -1,0 +1,195 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background: #08061a;
+}
+
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+.splash {
+    position: relative;
+    z-index: 1;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+}
+
+/* ── Logo ── */
+.logo-ring {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeScale 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+}
+
+.logo-ring__svg {
+    position: absolute;
+    inset: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    animation: spinRing 8s linear infinite;
+}
+
+.logo-ring__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+@keyframes spinRing {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ── Testo ── */
+.splash-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(167, 139, 250, 0.8);
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.7s forwards;
+}
+
+.splash-name {
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.85s forwards;
+}
+
+.splash-name em {
+    font-style: normal;
+    background: linear-gradient(135deg, #667eea 0%, #a78bfa 50%, #764ba2 100%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradShift 4s ease infinite;
+}
+
+@keyframes gradShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.splash-role {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1s forwards;
+}
+
+/* ── Bottone ── */
+.splash-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 2.6rem;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 1.15s forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 6px 30px rgba(102, 126, 234, 0.4);
+    overflow: hidden;
+}
+
+.splash-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s ease infinite 1.8s;
+}
+
+@keyframes shimmer {
+    0%        { left: -75%; }
+    60%, 100% { left: 130%; }
+}
+
+.splash-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 14px 44px rgba(102, 126, 234, 0.65);
+    color: #fff;
+}
+
+.splash-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+}
+
+.splash-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.splash-btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* ── Footer ── */
+.splash-footer {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.15);
+    z-index: 2;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.4s forwards;
+}
+
+/* ── Keyframes comuni ── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 480px) {
+    .logo-ring { width: 130px; height: 130px; }
+}
