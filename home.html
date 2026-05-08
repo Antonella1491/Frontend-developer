@@ -29,15 +29,26 @@
         // Pre-compila oggetto se arrivato da prezzi.html
         document.addEventListener('DOMContentLoaded', function () {
             const subject = sessionStorage.getItem('quoteSubject');
-            if (subject) {
-                const el = document.getElementById('contact-subject');
-                if (el) {
-                    el.value = subject;
-                    el.dispatchEvent(new Event('input', { bubbles: true }));
-                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                if (subject) {
+                    const el = document.getElementById('contact-subject');
+                    if (el) {
+                        el.value = subject;
+                        el.dispatchEvent(new Event('input', { bubbles: true }));
+                        el.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                    sessionStorage.removeItem('quoteSubject');
                 }
-                sessionStorage.removeItem('quoteSubject');
-            }
+
+                // If requested from prezzi page, focus the first contact input
+                if (sessionStorage.getItem('focusContact')) {
+                    sessionStorage.removeItem('focusContact');
+                    setTimeout(() => {
+                        const firstInput = document.getElementById('contact-name');
+                        if (firstInput) {
+                            try { firstInput.focus(); } catch (e) {}
+                        }
+                    }, 500);
+                }
         });
     </script>
 
