@@ -868,6 +868,8 @@ function initPrezziPage() {
             subject = 'Richiesta informazioni';
         }
         sessionStorage.setItem('quoteSubject', subject);
+        // Ask home page to focus the contact form first input after navigation
+        sessionStorage.setItem('focusContact', '1');
         window.location.href = 'home.html#contact';
     });
 
