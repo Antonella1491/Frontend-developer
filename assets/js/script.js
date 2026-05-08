@@ -160,6 +160,32 @@ function initContactForm() {
     const submitBtn  = document.getElementById('submit-btn');
     const phoneInput = document.getElementById('contact-phone');
     const phoneError = document.getElementById('phone-error');
+    const emailInput = document.getElementById('contact-email');
+    const emailError = document.getElementById('email-error');
+    // ── Validazione email on-blur ─────────────────────────────
+    emailInput.addEventListener('blur', function () {
+        const val = this.value.trim();
+        if (val && !isValidEmail(val)) {
+            emailInput.classList.add('is-invalid');
+            emailError.innerHTML = '<i class="bi bi-exclamation-circle me-1"></i>Inserisci un indirizzo email valido (es. nome@dominio.it)';
+            emailError.style.display = 'block';
+        } else {
+            emailInput.classList.remove('is-invalid');
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+        }
+        updateSubmitBtn();
+    });
+
+    // Rimuovi errore appena l'utente riprende a scrivere
+    emailInput.addEventListener('input', function () {
+        if (emailInput.classList.contains('is-invalid')) {
+            emailInput.classList.remove('is-invalid');
+            emailError.textContent = '';
+            emailError.style.display = 'none';
+        }
+        updateSubmitBtn();
+    });
 
     // Regex telefono: accetta formati italiani e internazionali
     const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?[-\s\.]?[0-9]{3,4}[-\s\.]?[0-9]{3,5}$/;
