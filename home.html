@@ -321,12 +321,17 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="py-5">
+        <section id="portfolio" class="py-5 bg-white">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center mb-5">
                         <h2 class="section-title">Il Mio Portfolio</h2>
                         <div class="section-divider"></div>
+                        <p class="text-muted portfolio-note">
+                            <i class="bi bi-info-circle me-2" aria-hidden="true"></i>
+                            Tutti i progetti qui sotto sono realizzabili con i pacchetti disponibili nella
+                            <a href="prezzi.html" class="portfolio-note__link">pagina Prezzi</a>.
+                        </p>
                     </div>
                 </div>
                 <div class="row">
@@ -336,12 +341,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto E-commerce Website">
                                     <i class="bi bi-laptop" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="E-commerce Website"
-                                            data-stack="HTML, CSS, JavaScript, Bootstrap"
-                                            data-icon="bi-laptop">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -356,12 +355,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Mobile App Landing">
                                     <i class="bi bi-phone" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Mobile App Landing"
-                                            data-stack="Angular, SCSS, Bootstrap"
-                                            data-icon="bi-phone">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -376,12 +369,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Corporate Website">
                                     <i class="bi bi-globe" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Corporate Website"
-                                            data-stack="HTML5, CSS3, JavaScript"
-                                            data-icon="bi-globe">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -396,12 +383,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Creative Portfolio">
                                     <i class="bi bi-brush" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Creative Portfolio"
-                                            data-stack="Vue.js, SCSS, Animation"
-                                            data-icon="bi-brush">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -416,12 +397,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Dashboard Analytics">
                                     <i class="bi bi-graph-up" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Dashboard Analytics"
-                                            data-stack="Angular, Chart.js, Bootstrap"
-                                            data-icon="bi-graph-up">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -436,12 +411,6 @@
                                 <div class="placeholder-project" role="img"
                                     aria-label="Anteprima progetto Blog Platform">
                                     <i class="bi bi-journal-text" aria-hidden="true"></i>
-                                    <div class="overlay">
-                                        <button class="btn btn-outline-light btn-request-project"
-                                            data-project="Blog Platform"
-                                            data-stack="JavaScript, CSS Grid, API"
-                                            data-icon="bi-journal-text">Richiedi questo progetto</button>
-                                    </div>
                                 </div>
                             </div>
                             <div class="portfolio-info">
@@ -661,67 +630,6 @@
                     </button>
                     <a href="prezzi.html" class="btn btn-modal-cancel">
                         <i class="bi bi-tag me-1" aria-hidden="true"></i>Vedi i Prezzi
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Richiesta Progetto -->
-    <div class="modal fade" id="projectRequestModal" tabindex="-1" aria-labelledby="projectRequestModalLabel"
-        aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content project-request-modal">
-                <button type="button" class="btn-close btn-close-white project-request-close"
-                    data-bs-dismiss="modal" aria-label="Chiudi"></button>
-
-                <!-- Header con icona e particelle -->
-                <div class="prm-header">
-                    <div class="prm-particles" aria-hidden="true">
-                        <span></span><span></span><span></span><span></span><span></span>
-                    </div>
-                    <div class="prm-icon-wrap">
-                        <i class="bi prm-project-icon" id="prm-icon" aria-hidden="true"></i>
-                    </div>
-                    <div class="prm-badge">Nuovo Progetto</div>
-                </div>
-
-                <!-- Body -->
-                <div class="prm-body">
-                    <h4 class="prm-title" id="projectRequestModalLabel">
-                        Vuoi un progetto simile a<br>
-                        <span class="prm-project-name" id="prm-project-name"></span>?
-                    </h4>
-                    <p class="prm-desc">Parliamoci! Dimmi cosa hai in mente e costruiamo insieme la tua idea.</p>
-
-                    <div class="prm-stack-wrap">
-                        <span class="prm-stack-label">Tecnologie utilizzate</span>
-                        <div class="prm-stack-chips" id="prm-stack-chips"></div>
-                    </div>
-
-                    <div class="prm-steps">
-                        <div class="prm-step">
-                            <div class="prm-step-num">1</div>
-                            <span>Scrivi il tuo messaggio nel form contatti</span>
-                        </div>
-                        <div class="prm-step">
-                            <div class="prm-step-num">2</div>
-                            <span>Ricevi una risposta entro 24h</span>
-                        </div>
-                        <div class="prm-step">
-                            <div class="prm-step-num">3</div>
-                            <span>Definiamo insieme obiettivi e preventivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="prm-footer">
-                    <button type="button" class="btn prm-btn-cancel" data-bs-dismiss="modal">
-                        <i class="bi bi-x-lg me-1" aria-hidden="true"></i>Forse più tardi
-                    </button>
-                    <a href="#contact" class="btn prm-btn-confirm" id="prm-go-contact">
-                        <i class="bi bi-send me-1" aria-hidden="true"></i>Parliamone!
                     </a>
                 </div>
             </div>
