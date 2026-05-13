@@ -1608,7 +1608,16 @@ footer .social-links .social-link:hover i {
 }
 
 /* ───────── Modali Conferma & Recap ───────── */
-.confirm-modal-content,
+.confirm-modal-content {
+  background: linear-gradient(145deg, #1e1b4b 0%, #2d2260 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  color: #ffffff;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
 .qrm-summary {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
