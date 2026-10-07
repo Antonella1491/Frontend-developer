@@ -29,26 +29,26 @@
         // Pre-compila oggetto se arrivato da prezzi.html
         document.addEventListener('DOMContentLoaded', function () {
             const subject = sessionStorage.getItem('quoteSubject');
-                if (subject) {
-                    const el = document.getElementById('contact-subject');
-                    if (el) {
-                        el.value = subject;
-                        el.dispatchEvent(new Event('input', { bubbles: true }));
-                        el.dispatchEvent(new Event('change', { bubbles: true }));
-                    }
-                    sessionStorage.removeItem('quoteSubject');
+            if (subject) {
+                const el = document.getElementById('contact-subject');
+                if (el) {
+                    el.value = subject;
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
                 }
+                sessionStorage.removeItem('quoteSubject');
+            }
 
-                // If requested from prezzi page, focus the first contact input
-                if (sessionStorage.getItem('focusContact')) {
-                    sessionStorage.removeItem('focusContact');
-                    setTimeout(() => {
-                        const firstInput = document.getElementById('contact-name');
-                        if (firstInput) {
-                            try { firstInput.focus(); } catch (e) {}
-                        }
-                    }, 500);
-                }
+            // If requested from prezzi page, focus the first contact input
+            if (sessionStorage.getItem('focusContact')) {
+                sessionStorage.removeItem('focusContact');
+                setTimeout(() => {
+                    const firstInput = document.getElementById('contact-name');
+                    if (firstInput) {
+                        try { firstInput.focus(); } catch (e) { }
+                    }
+                }, 500);
+            }
         });
     </script>
 
@@ -173,8 +173,6 @@
                         <div class="about-content">
                             <h3 class="mb-4">Frontend Developer</h3>
                             <p class="mb-4">
-
-
                                 Sviluppo interfacce web moderne, responsive e accessibili, con particolare attenzione
                                 all’esperienza utente e alla qualità del codice.
 
@@ -466,8 +464,10 @@
                         </div>
                         <a href="prezzi.html" class="btn pricing-cta-btn" aria-label="Vai alla pagina dei prezzi">
                             <i class="bi bi-tag me-2" aria-hidden="true"></i>Vedi i prezzi
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="margin-left:.3rem">
-                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"
+                                style="margin-left:.3rem">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                     </div>
@@ -496,7 +496,8 @@
                                 <i class="bi bi-envelope text-primary"></i>
                                 <div>
                                     <h6>Email</h6>
-                                    <p><a href="mailto:antonellapirozzi1491@libero.it" class="contact-link">antonellapirozzi1491@libero.it</a></p>
+                                    <p><a href="mailto:antonellapirozzi1491@libero.it"
+                                            class="contact-link">antonellapirozzi1491@libero.it</a></p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -521,7 +522,8 @@
                                     <label for="contact-email" class="sr-only">La tua email</label>
                                     <input type="email" id="contact-email" name="email" class="form-control"
                                         placeholder="La tua email" required aria-describedby="email-error">
-                                    <div id="email-error" class="form-field-error" role="alert" aria-live="polite" style="display:none;"></div>
+                                    <div id="email-error" class="form-field-error" role="alert" aria-live="polite"
+                                        style="display:none;"></div>
                                 </div>
                             </div>
                             <div class="row">
